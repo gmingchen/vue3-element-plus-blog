@@ -1,6 +1,9 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -8,7 +11,14 @@ export default defineConfig(({ mode }) => {
   const config = {
     root: process.cwd(), // 项目根目录（index.html 文件所在的位置）。可以是一个绝对路径，或者一个相对于该配置文件本身的相对路径。
     base: './', // 公共基础路径。
-    plugins: [vue()], // 需要用到的插件数组。
+    plugins: [ // 需要用到的插件数组。
+      vue(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })],
     publicDir: 'public', // 作为静态资源服务的文件夹。
     cacheDir: 'node_modules/.vite', // 存储缓存文件的目录。
     resolve: {

@@ -13,6 +13,9 @@ module.exports = {
   parserOptions: {
     sourceType: 'module'
   },
+  globals: {
+    'defineProps': true
+  },
   rules: {
     // todo: vue eslint plugin
     'vue/max-attributes-per-line': [1, { 'singleline': 3, 'multiline': { 'max': 1 } }], // 超过3个特性的元素应该分多行撰写，每个特性一行
@@ -28,6 +31,7 @@ module.exports = {
     'vue/html-comment-content-newline': [1, { 'singleline': 'never', 'multiline': 'always' }], // 注释换行
     'vue/no-v-html': 0,
     'vue/require-default-prop': 0, // 使用 defineProps 不需要设置默认
+    'vue/multi-word-component-names': [1, { 'ignores': ['index', '401', '404', '500'] }], // 组件名字限制
     // 'vue/script-indent': ['error', 2, { 'baseIndent': 1 }], // js缩进
     // todo: eslint
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -50,7 +54,7 @@ module.exports = {
     'no-alert': process.env.NODE_ENV === 'production' ? 1 : 0, // 禁用 alert、confirm 和 prompt
     'no-caller': 1, // 禁用 arguments.caller 或 arguments.callee
     'no-empty-function': 1, // 禁止出现空函数
-    'no-extend-native': 1, // 禁止扩展原生类型
+    'no-extend-native': [1, { 'exceptions': ['Array'] }], // 禁止扩展原生类型
     'no-fallthrough': [0, { 'commentPattern': 'break[\\s\\w]*omitted' }], // 禁止 case 语句落空
     'no-floating-decimal': 1, // 禁止数字字面量中使用前导和末尾小数点
     'no-labels': [1, { 'allowLoop': false, 'allowSwitch': false }], // 禁用标签语句
@@ -72,6 +76,7 @@ module.exports = {
     'wrap-iife': [1, 'any'], // 要求 IIFEs 使用括号括起来
     'no-label-var': 1, // 不允许标签与变量同名
     'no-shadow': 1, // 禁止变量声明与外层作用域的变量同名
+    'no-undef': 1, //
     'no-undef-init': 1, // 禁止将变量初始化为 undefined
     'no-undefined': 1, // 禁止将 undefined 作为标识符
     'no-unused-vars': [0, { 'vars': 'all', /* 'varsIgnorePattern': '[iI]gnored', */ 'args': 'none', 'argsIgnorePattern': '^_' }], // 未使用过的变量 用下划线开头

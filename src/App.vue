@@ -1,18 +1,20 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-
-  <HelloWorld msg="Hello Vue 3 + Vit1e" />
-
+  {{ t('language.chinese') }}
+  <router-view />
 </template>
 
-<script setup>
+<script>
+import { defineComponent } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-import HelloWorld from '@/components/HelloWorld.vue'
-
-const a = 0
-
-console.log(import.meta.env)
-
+export default defineComponent({
+  setup() {
+    const { t } = useI18n()
+    return {
+      t
+    }
+  }
+})
 </script>
 
 <style>
@@ -22,6 +24,5 @@ console.log(import.meta.env)
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
