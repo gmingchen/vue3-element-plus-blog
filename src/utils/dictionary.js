@@ -1,13 +1,10 @@
+import i18n from '@/i18n'
+
 // 请求头-内容类型
 export const ContentType = {
   JSON: 'application/json;charset=UTF-8',
   FORM: 'application/x-www-form-urlencoded;charset=UTF-8',
   UPLOAD: 'multipart/form-data'
-}
-// 令牌键值
-export const TokenKey = {
-  TOKEN: 'token',
-  ACCESS: 'access'
 }
 // 本地存储类型
 export const StorageType = {
@@ -15,46 +12,47 @@ export const StorageType = {
   SESSION: 'sessionStorage',
   LOCAL: 'localStorage'
 }
-// 请求成功状态码
-export const SuccessCode = {
-  ZERO: 0,
-  TWO_HUNDRED: 200
-}
-// 请求 mapping
-export const RequestMapping = {
-  SLIPPER: '/slipper',
-  API: '/api'
-}
-// 双向绑定名
-export const ModelBinding = {
-  MODEL_VALUE: 'update:modelValue',
-  MODEL_EVENT: 'update:modelEvent'
-}
+
+// 语言
+export const LANGUAGE = [
+  {
+    label_cn: '中文',
+    label_en: 'Chinese',
+    value: 'cn'
+  },
+  {
+    label_cn: '英文',
+    label_en: 'English',
+    value: 'en'
+  }
+]
 
 // 性别
 export const SEX = [
   {
-    label: '女',
+    label_cn: '女',
+    label_en: 'Girl',
     value: 0
   },
   {
-    label: '男',
+    label_cn: '男',
+    label_en: 'Boy',
     value: 1
   },
   {
-    label: '男',
-    value: 1
+    label_cn: '保密',
+    label_en: 'Secrecy',
+    value: 2
   }
 ]
 
 // 扩展源生 Array 根据 value 获取 label
-Array.prototype.getLable = function (value) {
+Array.prototype.getLabel = function (value) {
   let label = ''
   for (let i = 0; i < this.length; i++) {
     if (value + '' === this[i].value + '') {
-      label = this[i].label
+      label = this[i][`label_${ i18n.global.locale }`]
     }
   }
   return label
 }
-

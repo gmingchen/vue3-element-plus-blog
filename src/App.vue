@@ -1,17 +1,23 @@
 <template>
-  {{ t('language.chinese') }}
-  <router-view />
+  <el-config-provider :locale="locale">
+    <router-view />
+  </el-config-provider>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { defineComponent, computed } from 'vue'
+import { useStore } from 'vuex'
+
+import i18n from './i18n'
 
 export default defineComponent({
   setup() {
-    const { t } = useI18n()
+    const store = useStore()
+    const language = computed(() => store.getters['setting/language'])
+    const locale = computed(() => i18n.global.messages[language.value].el)
+
     return {
-      t
+      locale
     }
   }
 })
