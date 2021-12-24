@@ -1,16 +1,11 @@
 <template>
-  <div>
-    home
-    <Language />
-  </div>
+  <div>数据概况</div>
 </template>
 
 <script>
 import { defineComponent } from 'vue'
-import Language from '@/components/language/index.vue'
 
 export default defineComponent({
-  components: { Language },
   setup() {
     return {}
   }

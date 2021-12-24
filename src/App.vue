@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="locale">
-    <router-view />
+    <router-view v-if="!reload" />
   </el-config-provider>
 </template>
 
@@ -15,9 +15,11 @@ export default defineComponent({
     const store = useStore()
     const language = computed(() => store.getters['setting/language'])
     const locale = computed(() => i18n.global.messages[language.value].el)
+    const reload = computed(() => store.state.setting.reload)
 
     return {
-      locale
+      locale,
+      reload
     }
   }
 })
@@ -28,7 +30,6 @@ export default defineComponent({
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  height: 100%;
 }
 </style>

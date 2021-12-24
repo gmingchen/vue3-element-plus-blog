@@ -1,11 +1,15 @@
 <template>
   <el-dropdown trigger="click" @command="commandHandle">
-    <span class="link">
+    <span class="link cursor-pointer">
       <g-icon name="language" />{{ languages.getLabel(language) }}<g-svg name="arrow-down" />
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item v-for="item in languages" :key="item.value" :command="item.value">
+        <el-dropdown-item
+          v-for="item in languages"
+          :key="item.value"
+          :command="item.value"
+          :disabled="language === item.value">
           {{ item[`label_${language}`] }}
         </el-dropdown-item>
       </el-dropdown-menu>

@@ -31,7 +31,7 @@ module.exports = {
     'vue/html-comment-content-newline': [1, { 'singleline': 'never', 'multiline': 'always' }], // 注释换行
     'vue/no-v-html': 0,
     'vue/require-default-prop': 0, // 使用 defineProps 不需要设置默认
-    'vue/multi-word-component-names': [1, { 'ignores': ['index', '401', '404', '500'] }], // 组件名字限制
+    'vue/multi-word-component-names': [1, { 'ignores': ['index', '401', '404', '500', 'Sub'] }], // 组件名字限制多字
     // 'vue/script-indent': ['error', 2, { 'baseIndent': 1 }], // js缩进
     // todo: eslint
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',

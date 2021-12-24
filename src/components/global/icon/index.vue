@@ -1,7 +1,5 @@
 <template>
-  <span>
-    <i class="iconfont" :style="style" :class="`icon-${name}`" />
-  </span>
+  <i class="iconfont" :style="style" :class="`icon-${name}`" />
 </template>
 <!--
  * 使用:
@@ -45,8 +43,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '//at.alicdn.com/t/font_2727717_3p1wktykydn.css';
-span {
-  padding: 0 2px;
+@import '//at.alicdn.com/t/font_2727717_mep7x6fsuwq.css';
+i {
+  padding: 0 5px;
 }
 </style>
