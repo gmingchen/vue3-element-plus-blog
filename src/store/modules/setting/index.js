@@ -2,7 +2,6 @@ import {
   getLanguage, setLanguage, clearLanguage,
   setTheme, getTheme, clearTheme
 } from '@/utils/storage'
-import i18n from '@/i18n'
 
 const defaultLanguage = 'cn'
 
@@ -72,8 +71,6 @@ export default {
       commit('SET_THEME', defaultTheme)
       commit('SET_LANGUAGE', defaultLanguage)
       clearLanguage()
-      // i18n.setLocale('en')
-      console.log(i18n)
       clearTheme()
     }
   }
