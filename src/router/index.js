@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from 'nprogress'
+import store from '@/store'
 
 /* 主入口 */
 const client = {
@@ -88,7 +89,7 @@ const router = createRouter({
 router.beforeEach((to, _from, next) => {
   NProgress.start()
   // 标题控制
-  document.title = to.meta.title_cn || document.title
+  document.title = to.meta[`title_${ store.getters['setting/language'] }`] || document.title
   next()
 })
 

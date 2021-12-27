@@ -5,10 +5,13 @@
     <g-icon name="set" @click="themeHandle" />
     <Language />
     <el-dropdown trigger="click" @command="commandHandle">
-      <img class="console-portrait margin_l-5 cursor-pointer" src="http://oss.blog.gumingchen.icu/image/slipper.jpeg">
+      <img
+        :style="{ height: `${ height- 5 }px`, width: `${ height- 5 }px` }"
+        class="console-portrait margin_l-5 cursor-pointer"
+        src="http://oss.blog.gumingchen.icu/image/slipper.jpeg">
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="blog">{{ t('console.blog') }}</el-dropdown-item>
+          <el-dropdown-item command="blog">{{ t('console.enterBlog') }}</el-dropdown-item>
           <el-dropdown-item command="exit" divided>{{ t('console.exit') }}</el-dropdown-item>
         </el-dropdown-menu>
       </template>
@@ -37,6 +40,7 @@ export default defineComponent({
     const refThemeDrawer = ref()
 
     const screen = computed(() => store.state.setting.screenfull)
+    const height = computed(() => store.state.console.theme.layout.headHeight)
 
     /**
      * @description: 组件刷新事件
@@ -69,8 +73,13 @@ export default defineComponent({
       }
     }
 
+    /**
+     * @description: 打开主题抽屉
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
     const themeHandle = () => {
-      console.log(2212121)
       refThemeDrawer.value.init()
     }
 
@@ -94,6 +103,7 @@ export default defineComponent({
       t,
       refThemeDrawer,
       screen,
+      height,
       refreshHandle,
       screenfullHandle,
       themeHandle,
@@ -109,8 +119,6 @@ export default defineComponent({
     cursor: pointer;
   }
   .console-portrait {
-    height: 40px;
-    width: 40px;
     vertical-align: middle;
     border-radius: 50%;
   }

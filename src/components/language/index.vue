@@ -21,6 +21,7 @@
 import { defineComponent, computed, reactive, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 import { LANGUAGE } from '@/utils/dictionary.js'
 
@@ -28,6 +29,7 @@ export default defineComponent({
   setup() {
     const { t, locale } = useI18n()
     const store = useStore()
+    const route = useRoute()
 
     const data = reactive({
       languages: LANGUAGE
@@ -38,6 +40,7 @@ export default defineComponent({
     const commandHandle = (command) => {
       locale.value = command
       store.dispatch('setting/setLanguage', command)
+      document.title = route.meta[`title_${ command }`]
     }
 
     return {

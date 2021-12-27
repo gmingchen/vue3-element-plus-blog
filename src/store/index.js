@@ -19,4 +19,11 @@ const store = createStore({
   }
 })
 
+// todo: 初始化主题色
+const el = document.documentElement
+const theme = store.state.setting.theme
+for (const key in theme) {
+  el.style.setProperty(`--el-color-${ key }`, theme[key])
+}
+
 export default store

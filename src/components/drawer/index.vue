@@ -5,7 +5,8 @@
     :direction="direction"
     :size="size"
     :modal="modal"
-    custom-class="custom-class">
+    :append-to-body="appendToBody"
+    custom-class="drawer-custom-class">
     <el-scrollbar class="padding_r-10">
       <slot />
     </el-scrollbar>
@@ -42,6 +43,14 @@ export default defineComponent({
     modal: { // 是否需要遮罩层
       type: Boolean,
       default: true
+    },
+    appendToBody: { // 是否插入 body 元素
+      type: Boolean,
+      default: false
+    },
+    customClass: { // 自定义类名
+      type: String,
+      default: ''
     }
   },
   emits: [UPDATE_MODEL_EVENT],
@@ -66,9 +75,15 @@ export default defineComponent({
 .el-drawer__header {
   margin-bottom: 0!important;
   padding: 0 20px 0 20px;
+  line-height: 50px;
 }
 .el-drawer__body {
   padding: 0 20px 0 20px;
   overflow: auto;
+}
+.drawer-custom-class {
+  .el-scrollbar__view {
+    width: calc(100% - 6px);
+  }
 }
 </style>
