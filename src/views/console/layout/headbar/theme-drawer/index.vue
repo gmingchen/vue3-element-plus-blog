@@ -259,6 +259,7 @@ export default defineComponent({
     const resetThemeHandle = (type) => {
       if (type === 'global') {
         store.dispatch('setting/resetTheme')
+        locale.value = 'cn'
         reloadHandle()
         locale.value = 'cn'
       } else if (type === 'console') {

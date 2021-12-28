@@ -2,7 +2,6 @@ import {
   getLanguage, setLanguage, clearLanguage,
   setTheme, getTheme, clearTheme
 } from '@/utils/storage'
-import i18n from '@/i18n'
 
 const defaultLanguage = 'cn'
 
