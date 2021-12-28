@@ -11,8 +11,8 @@
         src="http://oss.blog.gumingchen.icu/image/slipper.jpeg">
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="blog">{{ t('console.enterBlog') }}</el-dropdown-item>
-          <el-dropdown-item command="exit" divided>{{ t('console.exit') }}</el-dropdown-item>
+          <el-dropdown-item v-t="'console.enterBlog'" command="blog" />
+          <el-dropdown-item v-t="'console.exit'" command="exit" divided />
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -23,7 +23,6 @@
 <script>
 import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useStore } from 'vuex'
-import { useI18n } from 'vue-i18n'
 
 import { ElMessage } from 'element-plus'
 import Language from '@/components/language/index.vue'
@@ -35,7 +34,6 @@ export default defineComponent({
   components: { Language, ThemeDrawer },
   setup() {
     const store = useStore()
-    const { t } = useI18n()
 
     const refThemeDrawer = ref()
 
@@ -100,7 +98,6 @@ export default defineComponent({
     }
 
     return {
-      t,
       refThemeDrawer,
       screen,
       height,
