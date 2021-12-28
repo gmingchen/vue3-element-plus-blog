@@ -23,7 +23,7 @@ export default defineComponent({
     const height = computed(() => store.state.console.theme.layout.headHeight)
 
     const data = reactive({
-      menus: store.state.console.menu.list,
+      menus: store.state.menu.list,
       crumbs: []
     })
 

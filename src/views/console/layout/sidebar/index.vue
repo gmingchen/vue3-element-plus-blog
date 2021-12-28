@@ -25,7 +25,7 @@ export default defineComponent({
     const store = useStore()
     const route = useRoute()
 
-    const active = computed(() => store.state.console.menu.active)
+    const active = computed(() => store.state.menu.active)
 
     const theme = computed(() => {
       return {
@@ -35,14 +35,14 @@ export default defineComponent({
     })
 
     const data = reactive({
-      menus: store.state.console.menu.list
+      menus: store.state.menu.list
     })
 
     /**
      * 监听路由 设置菜单选中
      */
     watchEffect(() => {
-      store.dispatch('console/setMenuActive', route.name)
+      store.dispatch('menu/setActive', route.name)
     })
 
     return {

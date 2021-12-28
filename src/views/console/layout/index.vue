@@ -5,6 +5,7 @@
       <div class="flex-box flex_d-column height-full">
         <div class="head-wrap">
           <Headbar />
+          <Tabsbar v-if="layout.tabsDisplay" />
         </div>
         <div v-if="!refresh" class="flex-item_f-1 overflow-auto">
           <el-scrollbar>
@@ -22,16 +23,18 @@ import { useStore } from 'vuex'
 
 import Sidebar from './sidebar/index.vue'
 import Headbar from './headbar/index.vue'
+import Tabsbar from './tabsbar/index.vue'
 import View from '@/components/view/index.vue'
 
 export default defineComponent({
-  components: { Sidebar, Headbar, View },
+  components: { Sidebar, Headbar, Tabsbar, View },
   setup() {
     const store = useStore()
 
     const layout = computed(() => {
       return {
-        fixed: store.state.console.theme.layout.fixed
+        fixed: store.state.console.theme.layout.fixed,
+        tabsDisplay: store.state.console.theme.layout.tabsDisplay
       }
     })
 
