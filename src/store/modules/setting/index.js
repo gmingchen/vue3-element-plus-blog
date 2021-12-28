@@ -72,8 +72,6 @@ export default {
       commit('SET_THEME', defaultTheme)
       commit('SET_LANGUAGE', defaultLanguage)
       clearLanguage()
-      // i18n.setLocale('en')
-      console.log(i18n)
       clearTheme()
     }
   }

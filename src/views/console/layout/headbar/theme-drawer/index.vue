@@ -74,7 +74,7 @@ import Language from '@/components/language/index.vue'
 export default defineComponent({
   components: { Drawer, Language },
   setup() {
-    const { t } = useI18n()
+    const { t, locale } = useI18n()
     const store = useStore()
 
     const visible = ref(false)
@@ -260,6 +260,7 @@ export default defineComponent({
       if (type === 'global') {
         store.dispatch('setting/resetTheme')
         reloadHandle()
+        locale.value = 'cn'
       } else if (type === 'console') {
         store.dispatch('console/resetTheme')
       }
