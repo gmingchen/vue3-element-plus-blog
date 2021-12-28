@@ -8,7 +8,7 @@
         </div>
         <div v-if="!refresh" class="flex-item_f-1 overflow-auto">
           <el-scrollbar>
-            <View />
+            <View class="padding-20" />
           </el-scrollbar>
         </div>
       </div>

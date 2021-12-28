@@ -56,6 +56,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .console-sidebar {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   &-menu {
     border: none;
     &:not(.el-menu--collapse) {
