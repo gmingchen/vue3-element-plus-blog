@@ -67,6 +67,12 @@ const console = {
           meta: { title_cn: '标签', title_en: 'Label' }
         }
       ]
+    },
+    {
+      path: 'leaving-message',
+      name: 'leavingMessage',
+      component: () => import('@/views/console/modules/leaving-message/index.vue'),
+      meta: { title_cn: '留言', title_en: 'Leaving message' }
     }
   ]
 }

@@ -14,7 +14,8 @@ export default {
           { value: 'articleCategory', label_cn: '分类', label_en: 'Category', icon: 'category' },
           { value: 'articleLabel', label_cn: '标签', label_en: 'Label', icon: 'label' }
         ]
-      }
+      },
+      { value: 'leavingMessage', label_cn: '留言', label_en: 'Leaving message', icon: 'leaving-message' }
     ]
   },
   mutations: {
