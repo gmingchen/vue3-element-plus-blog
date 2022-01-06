@@ -11,14 +11,13 @@
     class="page margin_t-20"
     background
     layout="total, sizes, prev, pager, next, jumper, ->"
-
+    :hide-on-single-page="page.total <= page.size"
     :current-page="page.current"
     :page-sizes="page.sizes"
     :page-size="page.size"
     :total="page.total"
     @current-change="currentChangeHandle"
     @size-change="sizeChangeHandle" />
-    <!-- :hide-on-single-page="page.total <= page.size" -->
 </template>
 
 <script>

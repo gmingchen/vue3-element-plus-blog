@@ -1,18 +1,16 @@
+@import "element-plus/theme-chalk/src/index.scss";
 // 修复 消息确认弹窗样式
 .el-message-box__status {
   position: absolute !important;
 }
-// 修复 通知弹窗样式
-.el-notification {
-  &__icon {
-    height: var(--el-notification-icon-size)!important;
-    width: var(--el-notification-icon-size)!important;
-    font-size: var(--el-notification-icon-size)!important;
-  }
-  &--success, &--warning, &--info, &--error {
-    color: var(--el-notification-icon-color)!important;
-  }
-  &__closeBtn {
-    position: absolute !important;
+// 修复 输入框 图片位置居中
+.el-input__suffix-inner {
+  align-items: center;
+}
+// 修复 表格 内部loading 不显示 右侧和底部boder
+.el-table {
+  .el-loading-mask {
+    right: 1px;
+    bottom: 1px;
   }
 }

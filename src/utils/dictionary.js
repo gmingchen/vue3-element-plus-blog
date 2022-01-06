@@ -31,18 +31,32 @@ export const LANGUAGE = [
 export const SEX = [
   {
     label_cn: '女',
-    label_en: 'Girl',
+    label_en: 'Women',
     value: 0
   },
   {
     label_cn: '男',
-    label_en: 'Boy',
+    label_en: 'Men',
     value: 1
   },
   {
     label_cn: '保密',
     label_en: 'Secrecy',
     value: 2
+  }
+]
+
+// 状态
+export const STATUS = [
+  {
+    label_cn: '禁用',
+    label_en: 'Disable',
+    value: 0
+  },
+  {
+    label_cn: '启用',
+    label_en: 'Enable',
+    value: 1
   }
 ]
 

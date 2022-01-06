@@ -64,7 +64,7 @@ import AddEdit from './components/add-edit.vue'
 import usePage from '@/mixins/page'
 import { clearJson } from '@/utils'
 
-import { pageApi, delApi } from '@/api/console/category'
+import { pageApi, delApi } from '@/api/console/tag'
 
 export default defineComponent({
   components: { AddEdit },

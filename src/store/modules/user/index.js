@@ -6,6 +6,7 @@
  * @LastEditors: gumingchen
  * @LastEditTime: 2021-04-18 09:16:20
  */
+import { getToken, setToken } from '@/utils/storage'
 
 export default {
   state: {
@@ -19,16 +20,11 @@ export default {
       status: '',
       roles: []
     },
-    token: {
-      user_id: '',
-      token: '',
-      expired_at: '',
-      updated_at: ''
-    }
+    token: getToken()
   },
   getters: {
     tokenVal: state => {
-      return state.token.token
+      return state.token
     }
   },
   mutations: {

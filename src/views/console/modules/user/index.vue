@@ -2,34 +2,71 @@
   <div>
     <el-form ref="refForm" :inline="true" @keyup.enter="reacquireHandle()">
       <el-form-item>
-        <el-input v-model="form.name" :placeholder="t('column.name')" clearable />
+        <el-input v-model="form.name" :placeholder="`${t('column.username')} / ${t('column.nickname')}`" clearable />
       </el-form-item>
       <el-form-item>
         <el-button v-repeat @click="reacquireHandle()">{{ t('button.search') }}</el-button>
         <el-button v-repeat @click="clearJson(form), reacquireHandle()">{{ t('button.reset') }}</el-button>
-        <el-button v-repeat type="primary" @click="addEditHandle()">{{ t('button.add') }}</el-button>
-        <el-button
-          v-repeat
-          type="danger"
-          :disabled="selection.length <= 0"
-          @click="delHandle()">{{ t('button.batch', [t('button.delete')]) }}</el-button>
       </el-form-item>
     </el-form>
     <el-table
       v-loading="loading"
       border
-      :data="list"
-      @selection-change="selectionHandle">
+      :data="list">
       <el-table-column align="center" type="selection" width="50" />
       <el-table-column
         align="center"
         label="ID"
         prop="id"
-        width="80" />
+        width="80">
+        <template #default="{row}">
+          <icon
+            v-if="row.author"
+            name="author"
+            class="author-icon"
+            size="20px" />
+          {{ row.id }}
+        </template>
+      </el-table-column>
       <el-table-column
         align="center"
-        :label="t('column.name')"
-        prop="name" />
+        :label="t('column.avatar')"
+        prop="avatar"
+        width="90">
+        <template #default="{ row }">
+          <el-avatar :src="row.avatar" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.username')"
+        prop="username" />
+      <el-table-column
+        align="center"
+        :label="t('column.nickname')"
+        prop="nickname" />
+      <el-table-column
+        align="center"
+        :label="t('column.mobile')"
+        prop="mobile" />
+      <el-table-column
+        align="center"
+        :label="t('column.sex')"
+        prop="sex">
+        <template #default="{row}">
+          {{ SEX.getLabel(row.sex) }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('table.status')"
+        prop="status">
+        <template #default="{row}">
+          <el-tag :type="row.status === 1 ? 'success' : 'danger'">
+            {{ STATUS.getLabel(row.status) }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column
         align="center"
         :label="t('table.createTime')"
@@ -40,17 +77,14 @@
         width="110"
         fixed="right">
         <template #default="{ row }">
-          <el-button
-            type="text"
-            @click="addEditHandle(row.id)">{{ t('button.edit') }}</el-button>
-          <el-button
-            type="text"
-            @click="delHandle(row.id)">{{ t('button.delete') }}</el-button>
+          <el-button v-if="!row.author" type="text" @click="statusHandle(row)">
+            {{ t(row.status === 1 ? 'table.disable' : 'table.enable') }}
+          </el-button>
+          <span v-else>-</span>
         </template>
       </el-table-column>
     </el-table>
     <g-page :page="page" @change="pageChangeHandle" />
-    <add-edit v-if="visible" ref="refAddEdit" @refresh="getList" />
   </div>
 </template>
 
@@ -59,15 +93,14 @@ import { defineComponent, reactive, ref, toRefs, nextTick, onBeforeMount } from 
 import { useI18n } from 'vue-i18n'
 
 import { ElMessage, ElMessageBox } from 'element-plus'
-import AddEdit from './components/add-edit.vue'
 
 import usePage from '@/mixins/page'
 import { clearJson } from '@/utils'
+import { SEX, STATUS } from '@/utils/dictionary.js'
 
-import { pageApi, delApi } from '@/api/console/category'
+import { pageApi, statusApi } from '@/api/console/user'
 
 export default defineComponent({
-  components: { AddEdit },
   setup() {
     const { t } = useI18n()
 
@@ -76,12 +109,12 @@ export default defineComponent({
     const { page } = usePage()
     const data = reactive({
       loading: false,
-      visible: false,
       form: {
         name: ''
       },
       list: [],
-      selection: []
+      SEX,
+      STATUS
     })
 
     /**
@@ -120,37 +153,22 @@ export default defineComponent({
     }
 
     /**
-     * @description: 新增/编辑弹窗
-     * @param {*}
+     * @description: 禁用 / 启用
+     * @param {Object} row
      * @return {*}
      * @author: gumingchen
      */
-    const addEditHandle = id => {
-      data.visible = true
-      nextTick(() => {
-        refAddEdit.value.init(id)
-      })
-    }
-
-    /**
-     * @description: 删除
-     * @param {number} id
-     * @return {*}
-     * @author: gumingchen
-     */
-    const delHandle = id => {
-      let params
-      if (id) {
-        params = [id]
-      } else {
-        params = data.selection.map(item => item.id)
-      }
-      ElMessageBox.confirm(t('tip.confirmOperationTip', [params.join(','), id ? t('button.delete') : t('button.batch', [t('button.delete')])]), t('tip.title'), {
+    const statusHandle = row => {
+      ElMessageBox.confirm(t('tip.confirmOperationTip', [row.id, t(`table.${ row.status === 1 ? 'disable' : 'enable' }`)]), t('tip.title'), {
         confirmButtonText: t('button.confirm'),
         cancelButtonText: t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        delApi({ ids: params }).then(r => {
+        const params = {
+          id: row.id,
+          status: row.status === 1 ? 0 : 1
+        }
+        statusApi(params).then(r => {
           if (r) {
             ElMessage({
               message: t('tip.success'),
@@ -163,16 +181,6 @@ export default defineComponent({
         .catch(() => {
         // to do something on canceled
         })
-    }
-
-    /**
-     * @description: table多选事件
-     * @param {*} val
-     * @return {*}
-     * @author: gumingchen
-     */
-    const selectionHandle = val => {
-      data.selection = val
     }
 
     /**
@@ -200,11 +208,19 @@ export default defineComponent({
       getList,
       reacquireHandle,
       addEditHandle,
-      delHandle,
-      selectionHandle,
+      statusHandle,
       pageChangeHandle,
       clearJson
     }
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.author-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--el-color-success);
+}
+</style>

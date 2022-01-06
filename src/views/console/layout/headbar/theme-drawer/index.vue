@@ -305,6 +305,7 @@ export default defineComponent({
     margin-bottom: 0;
   }
   .el-form-item__content {
+    display: inline;
     text-align: right;
   }
 }

@@ -61,25 +61,31 @@ const console = {
           meta: { title_cn: '分类', title_en: 'Category' }
         },
         {
-          path: 'label',
-          name: 'articleLabel',
-          component: () => import('@/views/console/modules/article/label/index.vue'),
-          meta: { title_cn: '标签', title_en: 'Label' }
+          path: 'tag',
+          name: 'articleTag',
+          component: () => import('@/views/console/modules/article/tag/index.vue'),
+          meta: { title_cn: '标签', title_en: 'Tag' }
         }
       ]
     },
     {
-      path: 'leaving-message',
-      name: 'leavingMessage',
-      component: () => import('@/views/console/modules/leaving-message/index.vue'),
+      path: 'leave-message',
+      name: 'leaveMessage',
+      component: () => import('@/views/console/modules/leave-message/index.vue'),
       meta: { title_cn: '留言', title_en: 'Leaving message' }
+    },
+    {
+      path: 'user',
+      name: 'user',
+      component: () => import('@/views/console/modules/user/index.vue'),
+      meta: { title_cn: '用户', title_en: 'User' }
     }
   ]
 }
 
 /* 通用 */
 const global = [
-  { path: '/', redirect: { name: 'home' }, meta: { title_cn: '重定向', title_en: 'Redirect' } },
+  { path: '/', redirect: { name: 'articleTag' }, meta: { title_cn: '重定向', title_en: 'Redirect' } },
   { path: '/401', name: '401', component: () => import('@/views/global/401.vue'), meta: { title_cn: '401', title_en: '401' } },
   { path: '/404', name: '404', component: () => import('@/views/global/404.vue'), meta: { title_cn: '404', title_en: '404' } },
   { path: '/500', name: '500', component: () => import('@/views/global/500.vue'), meta: { title_cn: '500', title_en: '500' } }

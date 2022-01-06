@@ -2,12 +2,11 @@
   <div>
     <el-form ref="refForm" :inline="true" @keyup.enter="reacquireHandle()">
       <el-form-item>
-        <el-input v-model="form.name" :placeholder="t('column.name')" clearable />
+        <el-input v-model="form.name" :placeholder="`${t('column.username')} / ${t('column.nickname')}`" clearable />
       </el-form-item>
       <el-form-item>
         <el-button v-repeat @click="reacquireHandle()">{{ t('button.search') }}</el-button>
         <el-button v-repeat @click="clearJson(form), reacquireHandle()">{{ t('button.reset') }}</el-button>
-        <el-button v-repeat type="primary" @click="addEditHandle()">{{ t('button.add') }}</el-button>
         <el-button
           v-repeat
           type="danger"
@@ -28,21 +27,51 @@
         width="80" />
       <el-table-column
         align="center"
-        :label="t('column.name')"
-        prop="name" />
+        :label="t('column.avatar')"
+        prop="avatar"
+        width="90">
+        <template #default="{ row }">
+          <el-avatar :src="row.avatar" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.username')"
+        prop="username"
+        width="150" />
+      <el-table-column
+        align="center"
+        :label="t('column.nickname')"
+        prop="nickname"
+        width="150" />
+      <el-table-column
+        align="center"
+        :label="t('column.sex')"
+        prop="sex"
+        width="80">
+        <template #default="{row}">
+          {{ SEX.getLabel(row.sex) }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.content')"
+        prop="content"
+        show-overflow-tooltip />
       <el-table-column
         align="center"
         :label="t('table.createTime')"
-        prop="created_at" />
+        prop="created_at"
+        width="160" />
       <el-table-column
         align="center"
         :label="t('table.operation')"
-        width="110"
+        width="120"
         fixed="right">
         <template #default="{ row }">
           <el-button
             type="text"
-            @click="addEditHandle(row.id)">{{ t('button.edit') }}</el-button>
+            @click="viewHandle(row.id)">{{ t('button.view') }}</el-button>
           <el-button
             type="text"
             @click="delHandle(row.id)">{{ t('button.delete') }}</el-button>
@@ -50,7 +79,7 @@
       </el-table-column>
     </el-table>
     <g-page :page="page" @change="pageChangeHandle" />
-    <add-edit v-if="visible" ref="refAddEdit" @refresh="getList" />
+    <Detail v-if="visible" ref="refDetail" />
   </div>
 </template>
 
@@ -59,20 +88,21 @@ import { defineComponent, reactive, ref, toRefs, nextTick, onBeforeMount } from 
 import { useI18n } from 'vue-i18n'
 
 import { ElMessage, ElMessageBox } from 'element-plus'
-import AddEdit from './components/add-edit.vue'
+import Detail from './components/detail.vue'
 
 import usePage from '@/mixins/page'
 import { clearJson } from '@/utils'
+import { SEX } from '@/utils/dictionary.js'
 
-import { pageApi, delApi } from '@/api/console/category'
+import { pageApi, delApi } from '@/api/console/leave-message'
 
 export default defineComponent({
-  components: { AddEdit },
+  components: { Detail },
   setup() {
     const { t } = useI18n()
 
     const refForm = ref()
-    const refAddEdit = ref()
+    const refDetail = ref()
     const { page } = usePage()
     const data = reactive({
       loading: false,
@@ -81,7 +111,8 @@ export default defineComponent({
         name: ''
       },
       list: [],
-      selection: []
+      selection: [],
+      SEX
     })
 
     /**
@@ -125,10 +156,10 @@ export default defineComponent({
      * @return {*}
      * @author: gumingchen
      */
-    const addEditHandle = id => {
+    const viewHandle = id => {
       data.visible = true
       nextTick(() => {
-        refAddEdit.value.init(id)
+        refDetail.value.init(id)
       })
     }
 
@@ -194,12 +225,12 @@ export default defineComponent({
     return {
       t,
       refForm,
-      refAddEdit,
+      refDetail,
       page,
       ...toRefs(data),
       getList,
       reacquireHandle,
-      addEditHandle,
+      viewHandle,
       delHandle,
       selectionHandle,
       pageChangeHandle,

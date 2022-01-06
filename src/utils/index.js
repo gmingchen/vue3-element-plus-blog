@@ -143,8 +143,8 @@ export function clearJson(data) {
  * @author: gumingchen
  */
 export function getApiBaseUrl () {
-  const baseUrl = process.env.VUE_APP_PROXY === 'true'
+  const baseUrl = import.meta.env.VITE_APP_PROXY === 'true'
     ? `/proxy${ MAPPING }`
-    : process.env.VUE_APP_BASE_API + MAPPING
+    : import.meta.env.VITE_BASE_API + MAPPING
   return baseUrl
 }

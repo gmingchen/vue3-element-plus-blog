@@ -10,7 +10,44 @@ export default {
   },
   button: {
     title: '按钮',
-    reset: '重置'
+    search: '搜索',
+    reset: '重置',
+    add: '新增',
+    edit: '编辑',
+    delete: '删除',
+    batch: '批量{0}',
+    view: '查看',
+    detail: '详情',
+    confirm: '确认',
+    cancel: '取消'
+  },
+  column: {
+    title: '列',
+    name: '名称',
+    username: '用户名',
+    nickname: '昵称',
+    avatar: '头像',
+    mobile: '手机号',
+    sex: '性别',
+    content: '内容'
+  },
+  table: {
+    title: '表格',
+    status: '状态',
+    disable: '禁用',
+    enable: '启用',
+    createTime: '创建时间',
+    operation: '操作'
+  },
+  rule: {
+    title: '规则',
+    notBlank: '{0}不能为空'
+  },
+  tip: {
+    title: '提示',
+    success: '操作成功!',
+    confirmTip: '确定进行[{0}]操作?',
+    confirmOperationTip: '确定对[id={0}]进行[{1}]操作?'
   },
   console: {
     title: '控制台',
