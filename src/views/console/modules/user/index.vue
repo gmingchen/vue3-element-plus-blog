@@ -207,7 +207,6 @@ export default defineComponent({
       ...toRefs(data),
       getList,
       reacquireHandle,
-      addEditHandle,
       statusHandle,
       pageChangeHandle,
       clearJson

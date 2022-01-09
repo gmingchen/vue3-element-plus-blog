@@ -66,9 +66,12 @@
       <el-table-column
         align="center"
         :label="t('table.operation')"
-        width="120"
+        width="170"
         fixed="right">
         <template #default="{ row }">
+          <el-button
+            type="text"
+            @click="replyHandle(row)">{{ t('button.reply') }}</el-button>
           <el-button
             type="text"
             @click="viewHandle(row.id)">{{ t('button.view') }}</el-button>
@@ -95,6 +98,7 @@ import { clearJson } from '@/utils'
 import { SEX } from '@/utils/dictionary.js'
 
 import { pageApi, delApi } from '@/api/console/leave-message'
+import { replyAddApi } from '@/api/console/leave-message-reply'
 
 export default defineComponent({
   components: { Detail },
@@ -151,7 +155,39 @@ export default defineComponent({
     }
 
     /**
-     * @description: 新增/编辑弹窗
+     * @description: 回复留言
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const replyHandle = (row) => {
+      ElMessageBox.prompt('', t('button.reply'), {
+        confirmButtonText: t('button.confirm'),
+        cancelButtonText: t('button.cancel'),
+        inputType: 'textarea',
+        inputPattern: /\S/,
+        inputErrorMessage: t('rule.notBlank', [t('button.reply')])
+      }).then(({ value }) => {
+        const params = {
+          leave_message_id: row.id,
+          content: value,
+          to_user_id: row.user_id
+        }
+        replyAddApi(params).then(r => {
+          if (r) {
+            ElMessage({
+              message: t('tip.success'),
+              type: 'success'
+            })
+          }
+        })
+      }).catch(() => {
+        // to do something
+      })
+    }
+
+    /**
+     * @description: 查看回复弹窗
      * @param {*}
      * @return {*}
      * @author: gumingchen
@@ -230,6 +266,7 @@ export default defineComponent({
       ...toRefs(data),
       getList,
       reacquireHandle,
+      replyHandle,
       viewHandle,
       delHandle,
       selectionHandle,

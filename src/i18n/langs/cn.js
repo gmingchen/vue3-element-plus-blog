@@ -18,8 +18,10 @@ export default {
     batch: '批量{0}',
     view: '查看',
     detail: '详情',
+    reply: '回复',
     confirm: '确认',
-    cancel: '取消'
+    cancel: '取消',
+    close: '关闭'
   },
   column: {
     title: '列',
@@ -29,7 +31,8 @@ export default {
     avatar: '头像',
     mobile: '手机号',
     sex: '性别',
-    content: '内容'
+    content: '内容',
+    target: '目标'
   },
   table: {
     title: '表格',

@@ -8,7 +8,7 @@
 -->
 <template>
   <el-pagination
-    class="page margin_t-20"
+    class="page margin_t-20 width-full"
     background
     layout="total, sizes, prev, pager, next, jumper, ->"
     :hide-on-single-page="page.total <= page.size"

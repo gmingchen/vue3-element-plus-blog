@@ -18,8 +18,10 @@ export default {
     batch: 'Batch {0}',
     view: 'View',
     detail: 'Detail',
+    reply: 'Reply',
     confirm: 'Confirm',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    close: 'Close'
   },
   column: {
     title: 'Column',
@@ -29,7 +31,8 @@ export default {
     avatar: 'Avatar',
     mobile: 'Phone number',
     sex: 'Sex',
-    content: 'Content'
+    content: 'Content',
+    target: 'Target'
   },
   table: {
     title: 'Table',
