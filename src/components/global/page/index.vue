@@ -8,7 +8,7 @@
 -->
 <template>
   <el-pagination
-    class="page margin_t-20 width-full"
+    class="page flex_j_c-center margin_t-20 width-full"
     background
     layout="total, sizes, prev, pager, next, jumper, ->"
     :hide-on-single-page="page.total <= page.size"
@@ -59,12 +59,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.page {
-  text-align: center;
-  ::v-deep(.el-icon) {
-    margin: 0 auto;
-  }
-}
-</style>

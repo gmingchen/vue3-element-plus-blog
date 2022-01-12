@@ -69,6 +69,12 @@ const console = {
       ]
     },
     {
+      path: 'banner',
+      name: 'banner',
+      component: () => import('@/views/console/modules/banner/index.vue'),
+      meta: { title_cn: '轮播图', title_en: 'Rotation chart' }
+    },
+    {
       path: 'leave-message',
       name: 'leaveMessage',
       component: () => import('@/views/console/modules/leave-message/index.vue'),

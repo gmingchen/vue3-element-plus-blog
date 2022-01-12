@@ -15,6 +15,7 @@ export default {
           { value: 'articleTag', label_cn: '标签', label_en: 'Tag', icon: 'tag' }
         ]
       },
+      { value: 'banner', label_cn: '轮播图', label_en: 'Rotation chart', icon: 'banner' },
       { value: 'leaveMessage', label_cn: '留言', label_en: 'Leaving message', icon: 'leave-message' },
       { value: 'user', label_cn: '用户', label_en: 'User', icon: 'user' }
     ]
