@@ -32,7 +32,9 @@ export default {
     mobile: 'Phone number',
     sex: 'Sex',
     content: 'Content',
-    target: 'Target'
+    target: 'Target',
+    sort: 'Sort',
+    link: 'Link'
   },
   table: {
     title: 'Table',

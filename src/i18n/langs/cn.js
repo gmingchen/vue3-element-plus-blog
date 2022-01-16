@@ -32,7 +32,9 @@ export default {
     mobile: '手机号',
     sex: '性别',
     content: '内容',
-    target: '目标'
+    target: '目标',
+    sort: '排序',
+    link: '链接'
   },
   table: {
     title: '表格',

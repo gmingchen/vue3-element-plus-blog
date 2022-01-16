@@ -28,12 +28,63 @@
         width="80" />
       <el-table-column
         align="center"
-        :label="t('column.name')"
-        prop="name" />
+        :label="t('table.headline')"
+        prop="title" />
+      <el-table-column
+        align="center"
+        :label="t('table.image')"
+        prop="image">
+        <template #default="{ row }">
+          <el-image
+            class="img"
+            :src="row.image"
+            :preview-src-list="[row.image]" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('table.watermarkImage')"
+        prop="watermark">
+        <template #default="{ row }">
+          <el-image
+            class="img"
+            :src="row.watermark"
+            :preview-src-list="[row.watermark]" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.link')"
+        prop="url" />
+      <el-table-column
+        align="center"
+        :label="t('table.type')"
+        prop="type"
+        width="100">
+        <template #default="{ row }">
+          {{ BANNER_TYPE.getLabel(row.type) }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('table.sort')"
+        prop="sort" />
+      <el-table-column
+        align="center"
+        :label="t('table.status')"
+        prop="status"
+        width="100">
+        <template #default="{ row }">
+          <el-tag :type="row.status === 1 ? 'success' : 'danger'">
+            {{ STATUS.getLabel(row.status) }}
+          </el-tag>
+        </template>
+      </el-table-column>
       <el-table-column
         align="center"
         :label="t('table.createTime')"
-        prop="created_at" />
+        prop="created_at"
+        width="160" />
       <el-table-column
         align="center"
         :label="t('table.operation')"
@@ -62,6 +113,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import AddEdit from './components/add-edit.vue'
 
 import usePage from '@/mixins/page'
+import { STATUS, BANNER_TYPE } from '@/utils/dictionary'
 import { clearJson } from '@/utils'
 
 import { pageApi, delApi } from '@/api/console/banner'
@@ -77,6 +129,8 @@ export default defineComponent({
     const data = reactive({
       loading: false,
       visible: false,
+      STATUS,
+      BANNER_TYPE,
       form: {
         name: ''
       },
@@ -208,3 +262,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.img {
+  height: 100px;
+  width: 100px;
+}
+</style>

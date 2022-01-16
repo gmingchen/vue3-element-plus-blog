@@ -60,6 +60,20 @@ export const STATUS = [
   }
 ]
 
+// banner类型
+export const BANNER_TYPE = [
+  {
+    label_cn: 'URL',
+    label_en: 'URL',
+    value: 0
+  },
+  {
+    label_cn: 'Router',
+    label_en: 'Router',
+    value: 1
+  }
+]
+
 // 扩展源生 Array 根据 value 获取 label
 Array.prototype.getLabel = function (value) {
   let label = ''
