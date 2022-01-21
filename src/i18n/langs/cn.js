@@ -47,6 +47,7 @@ export default {
     disable: '禁用',
     enable: '启用',
     createTime: '创建时间',
+    updateTime: '更新时间',
     operation: '操作'
   },
   rule: {
@@ -57,7 +58,9 @@ export default {
     title: '提示',
     success: '操作成功!',
     confirmTip: '确定进行[{0}]操作?',
-    confirmOperationTip: '确定对[id={0}]进行[{1}]操作?'
+    confirmOperationTip: '确定对[id={0}]进行[{1}]操作?',
+    startTime: '开始时间',
+    endTime: '结束时间'
   },
   console: {
     title: '控制台',

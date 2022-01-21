@@ -47,6 +47,7 @@ export default {
     disable: 'Disable',
     enable: 'Enable',
     createTime: 'Creation time',
+    updateTime: 'Update time',
     operation: 'Operation'
   },
   rule: {
@@ -57,7 +58,9 @@ export default {
     title: 'Tip',
     success: 'Operation succeeded!',
     confirmTip: 'Confirm the [{0}] operation?',
-    confirmOperationTip: 'Confirm the [{1}] operation on [id={0}]?'
+    confirmOperationTip: 'Confirm the [{1}] operation on [id={0}]?',
+    startTime: 'Start time',
+    endTime: 'End time'
   },
   console: {
     title: 'Console',

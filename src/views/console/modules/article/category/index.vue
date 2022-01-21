@@ -36,6 +36,10 @@
         prop="created_at" />
       <el-table-column
         align="center"
+        :label="t('table.updateTime')"
+        prop="updated_at" />
+      <el-table-column
+        align="center"
         :label="t('table.operation')"
         width="110"
         fixed="right">

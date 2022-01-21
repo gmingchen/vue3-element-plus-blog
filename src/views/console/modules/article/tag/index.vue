@@ -36,6 +36,10 @@
         prop="created_at" />
       <el-table-column
         align="center"
+        :label="t('table.updateTime')"
+        prop="updated_at" />
+      <el-table-column
+        align="center"
         :label="t('table.operation')"
         width="110"
         fixed="right">
@@ -150,7 +154,7 @@ export default defineComponent({
         cancelButtonText: t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        delApi({ ids: params }).then(r => {
+        delApi(params).then(r => {
           if (r) {
             ElMessage({
               message: t('tip.success'),

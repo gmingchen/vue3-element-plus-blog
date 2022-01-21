@@ -5,6 +5,15 @@
         <el-input v-model="form.name" :placeholder="`${t('column.username')} / ${t('column.nickname')}`" clearable />
       </el-form-item>
       <el-form-item>
+        <el-date-picker
+          v-model="form.date"
+          type="daterange"
+          range-separator="-"
+          :start-placeholder="t('tip.startTime')"
+          :end-placeholder="t('tip.endTime')"
+          clearable />
+      </el-form-item>
+      <el-form-item>
         <el-button v-repeat @click="reacquireHandle()">{{ t('button.search') }}</el-button>
         <el-button v-repeat @click="clearJson(form), reacquireHandle()">{{ t('button.reset') }}</el-button>
       </el-form-item>
@@ -95,7 +104,7 @@ import { useI18n } from 'vue-i18n'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import usePage from '@/mixins/page'
-import { clearJson } from '@/utils'
+import { clearJson, parseDate2Str } from '@/utils'
 import { SEX, STATUS } from '@/utils/dictionary.js'
 
 import { pageApi, statusApi } from '@/api/console/user'
@@ -110,7 +119,8 @@ export default defineComponent({
     const data = reactive({
       loading: false,
       form: {
-        name: ''
+        name: '',
+        date: []
       },
       list: [],
       SEX,
@@ -125,7 +135,9 @@ export default defineComponent({
      */
     const getList = () => {
       const params = {
-        ...data.form,
+        name: data.form.name,
+        start: data.form.date && data.form.date.length ? parseDate2Str(data.form.date[0]) : '',
+        end: data.form.date && data.form.date.length ? parseDate2Str(data.form.date[1]) : '',
         current: page.current,
         size: page.size
       }
@@ -165,8 +177,8 @@ export default defineComponent({
         type: 'warning'
       }).then(() => {
         const params = {
-          id: row.id,
-          status: row.status === 1 ? 0 : 1
+          key: row.id,
+          value: row.status === 1 ? 0 : 1
         }
         statusApi(params).then(r => {
           if (r) {
