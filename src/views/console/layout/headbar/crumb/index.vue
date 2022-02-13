@@ -34,19 +34,22 @@ export default defineComponent({
      * @author: gumingchen
      */
     const crumbHandle = (menus) => {
+      let flag = false
       for (let i = 0; i < menus.length; i++) {
         const menu = menus[i]
         if (menu.children && menu.children.length > 0) {
-          crumbHandle(menu.children)
-          data.crumbs.push({
-            value: menu.value,
-            label_cn: menu.label_cn,
-            label_en: menu.label_en
-          })
+          if (crumbHandle(menu.children)) {
+            data.crumbs.push({
+              value: menu.value,
+              label_cn: menu.label_cn,
+              label_en: menu.label_en
+            })
+          }
         } else {
           if (route.name === menu.value) {
+            flag = true
             data.crumbs.push({
-              alue: menu.value,
+              value: menu.value,
               label_cn: menu.label_cn,
               label_en: menu.label_en
             })
@@ -54,6 +57,7 @@ export default defineComponent({
           }
         }
       }
+      return flag
     }
 
     watchEffect(() => {

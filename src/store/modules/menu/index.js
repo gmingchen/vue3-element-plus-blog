@@ -17,7 +17,16 @@ export default {
       },
       { value: 'banner', label_cn: '轮播图', label_en: 'Rotation chart', icon: 'banner' },
       { value: 'leaveMessage', label_cn: '留言', label_en: 'Leaving message', icon: 'leave-message' },
-      { value: 'user', label_cn: '用户', label_en: 'User', icon: 'user' }
+      { value: 'user', label_cn: '用户', label_en: 'User', icon: 'user' },
+      {
+        value: 'system',
+        label_cn: '系统管理',
+        label_en: 'System management',
+        icon: 'system',
+        children: [
+          { value: 'systemConfig', label_cn: '配置', label_en: 'Configure', icon: 'config' }
+        ]
+      }
     ]
   },
   mutations: {

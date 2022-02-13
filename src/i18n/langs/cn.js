@@ -20,6 +20,7 @@ export default {
     detail: '详情',
     reply: '回复',
     confirm: '确认',
+    set: '设置',
     cancel: '取消',
     close: '关闭'
   },
@@ -34,7 +35,9 @@ export default {
     content: '内容',
     target: '目标',
     sort: '排序',
-    link: '链接'
+    link: '链接',
+    key: '键',
+    value: '值'
   },
   table: {
     title: '表格',
@@ -46,6 +49,7 @@ export default {
     status: '状态',
     disable: '禁用',
     enable: '启用',
+    remark: '备注',
     createTime: '创建时间',
     updateTime: '更新时间',
     operation: '操作'

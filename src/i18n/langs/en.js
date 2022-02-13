@@ -20,6 +20,7 @@ export default {
     detail: 'Detail',
     reply: 'Reply',
     confirm: 'Confirm',
+    set: 'Set',
     cancel: 'Cancel',
     close: 'Close'
   },
@@ -34,7 +35,9 @@ export default {
     content: 'Content',
     target: 'Target',
     sort: 'Sort',
-    link: 'Link'
+    link: 'Link',
+    key: 'Key',
+    value: 'Value'
   },
   table: {
     title: 'Table',
@@ -46,6 +49,7 @@ export default {
     status: 'Status',
     disable: 'Disable',
     enable: 'Enable',
+    remark: 'Remark',
     createTime: 'Creation time',
     updateTime: 'Update time',
     operation: 'Operation'

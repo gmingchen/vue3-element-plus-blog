@@ -183,7 +183,8 @@ export default defineComponent({
         const params = {
           leave_message_id: row.id,
           content: value,
-          to_user_id: row.user_id
+          to_user_id: row.user_id,
+          type: 0
         }
         replyAddApi(params).then(r => {
           if (r) {

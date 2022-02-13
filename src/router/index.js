@@ -85,6 +85,21 @@ const console = {
       name: 'user',
       component: () => import('@/views/console/modules/user/index.vue'),
       meta: { title_cn: '用户', title_en: 'User' }
+    },
+    {
+      path: 'system',
+      name: 'system',
+      redirect: { name: 'systemConfig' },
+      component: () => import('@/components/view/index.vue'),
+      meta: { title_cn: '系统管理', title_en: 'System management' },
+      children: [
+        {
+          path: 'index',
+          name: 'systemConfig',
+          component: () => import('@/views/console/modules/system/config/index.vue'),
+          meta: { title_cn: '配置', title_en: 'Configure' }
+        }
+      ]
     }
   ]
 }

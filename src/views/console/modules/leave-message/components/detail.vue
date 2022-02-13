@@ -177,7 +177,8 @@ export default defineComponent({
           leave_message_id: data.form.id,
           content: value,
           to_user_id: row.from_user_id,
-          type: 1
+          type: 1,
+          leave_message_reply_id: row.id
         }
         replyAddApi(params).then(r => {
           if (r) {
@@ -211,7 +212,7 @@ export default defineComponent({
         cancelButtonText: t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        replyDelApi({ ids: params }).then(r => {
+        replyDelApi(params).then(r => {
           if (r) {
             ElMessage({
               message: t('tip.success'),
