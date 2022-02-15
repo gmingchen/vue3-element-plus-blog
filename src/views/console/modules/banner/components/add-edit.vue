@@ -28,7 +28,14 @@
           show-word-limit />
       </el-form-item>
       <el-form-item :label="t('table.image')" prop="image">
-        <Upload v-model:url="form.image" v-model:watermark="form.watermark" />
+        <div>
+          <el-switch
+            v-model="watermark"
+            active-text="添加水印"
+            inactive-text="取消水印" />
+          <Upload v-model:url="form.image" :watermark="watermark" />
+        </div>
+
       </el-form-item>
       <el-form-item :label="t('table.type')" prop="type">
         <el-radio-group v-model="form.type">
@@ -87,11 +94,11 @@ export default defineComponent({
       loading: false,
       STATUS,
       BANNER_TYPE,
+      watermark: false,
       form: {
         id: null,
         title: '',
         image: '',
-        watermark: '',
         url: '',
         type: 0,
         sort: 0,
@@ -125,7 +132,6 @@ export default defineComponent({
         if (r) {
           data.form.title = r.data.title
           data.form.image = r.data.image
-          data.form.watermark = r.data.watermark
           data.form.url = r.data.url
           data.form.type = r.data.type
           data.form.sort = r.data.sort

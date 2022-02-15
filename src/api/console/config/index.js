@@ -41,10 +41,24 @@ export function infoApi(params) {
  * @return {*}
  * @author: gumingchen
  */
-export function updateApi(params) {
+export function editApi(params) {
   return service({
     url: '/console/config/update',
-    method: 'get',
+    method: 'post',
+    data: params
+  })
+}
+
+/**
+ * @description: 启用配置
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function statusApi(params) {
+  return service({
+    url: '/console/config/status',
+    method: 'post',
     data: params
   })
 }

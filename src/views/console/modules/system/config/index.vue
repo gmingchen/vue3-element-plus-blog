@@ -74,7 +74,7 @@ import Set from './components/set.vue'
 
 import { STATUS } from '@/utils/dictionary.js'
 
-import { listApi } from '@/api/console/config'
+import { listApi, statusApi } from '@/api/console/config'
 
 export default defineComponent({
   components: { Set },
@@ -123,15 +123,15 @@ export default defineComponent({
           key: row.id,
           value: row.status === 1 ? 0 : 1
         }
-        // statusApi(params).then(r => {
-        //   if (r) {
-        //     ElMessage({
-        //       message: t('tip.success'),
-        //       type: 'success'
-        //     })
-        //     getList()
-        //   }
-        // })
+        statusApi(params).then(r => {
+          if (r) {
+            ElMessage({
+              message: t('tip.success'),
+              type: 'success'
+            })
+            getList()
+          }
+        })
       })
         .catch(() => {
         // to do something on canceled

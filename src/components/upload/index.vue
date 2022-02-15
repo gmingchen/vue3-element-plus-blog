@@ -5,9 +5,11 @@
     :headers="{
       [tokenKey]: token
     }"
+    :data="{ watermark: watermark }"
     :show-file-list="false"
     :before-upload="beforeHandle"
-    :on-success="successHandle">
+    :on-success="successHandle"
+    accept="image/*">
     <img v-if="thisUrl" :src="thisUrl" class="avatar">
     <GSvg v-else name="plus" />
   </el-upload>
@@ -30,7 +32,8 @@ export default defineComponent({
       type: String
     },
     watermark: {
-      type: String
+      type: Boolean,
+      default: false
     }
   },
   emits: ['update:url', 'update:watermark'],
@@ -44,7 +47,6 @@ export default defineComponent({
     })
 
     const thisUrl = useModel(props, 'url')
-    const thisWatermark = useModel(props, 'watermark')
 
     const beforeHandle = () => {
       //
@@ -52,7 +54,6 @@ export default defineComponent({
     const successHandle = (r) => {
       if (SUCCESS_CODE.includes(r.code)) {
         thisUrl.value = r.data.url
-        thisWatermark.value = r.data.watermark
       } else {
         ElMessage({
           message: r.message,
@@ -64,7 +65,6 @@ export default defineComponent({
     return {
       ...toRefs(data),
       thisUrl,
-      thisWatermark,
       beforeHandle,
       successHandle
     }

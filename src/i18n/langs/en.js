@@ -43,7 +43,6 @@ export default {
     title: 'Table',
     headline: 'Title',
     image: 'Image',
-    watermarkImage: 'Watermark image',
     type: 'Type',
     sort: 'Sort',
     status: 'Status',

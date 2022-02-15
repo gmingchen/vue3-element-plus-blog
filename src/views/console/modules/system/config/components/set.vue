@@ -17,15 +17,10 @@
       ref="refForm"
       v-loading="loading"
       :model="form"
-      :rules="rules"
-      label-position="left"
+      label-position="top"
       @keyup.enter="submit()">
-      <el-form-item :label="t('column.name')" prop="name">
-        <el-input
-          v-model="form.name"
-          :placeholder="t('column.name')"
-          maxlength="20"
-          show-word-limit />
+      <el-form-item v-for="item in keys" :key="item" :label="item">
+        <el-input v-model="form[item]" :placeholder="item" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -38,12 +33,12 @@
 </template>
 
 <script>
-import { computed, defineComponent, nextTick, reactive, ref, toRefs } from 'vue'
+import { defineComponent, nextTick, reactive, ref, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 import { ElMessage } from 'element-plus'
 
-import { addApi, editApi, infoApi } from '@/api/console/category'
+import { editApi, infoApi } from '@/api/console/config'
 
 export default defineComponent({
   emits: ['refresh'],
@@ -54,20 +49,9 @@ export default defineComponent({
     const data = reactive({
       visible: false,
       loading: false,
-      form: {
-        id: null,
-        name: ''
-      }
-    })
-
-    const rules = computed(() => {
-      const rule = {
-        name: [{ required: true, message: t('rule.notBlank', [t('column.name')]), trigger: 'blur' }]
-      }
-      nextTick(() => {
-        refForm.value.clearValidate()
-      })
-      return rule
+      id: null,
+      form: null,
+      keys: []
     })
 
     /**
@@ -79,11 +63,16 @@ export default defineComponent({
     const init = async (id) => {
       data.visible = true
       data.loading = true
-      data.form.id = id
-      if (data.form.id) {
-        const r = await infoApi({ id: data.form.id })
-        if (r) {
-          data.form.name = r.data.name
+      data.id = id
+      if (data.id) {
+        const r = await infoApi({ id: data.id })
+        if (r && r.data) {
+          data.form = JSON.parse(r.data)
+          for (const key in data.form) {
+            if (Object.hasOwnProperty.call(data.form, key)) {
+              data.keys.push(key)
+            }
+          }
         }
       }
       nextTick(() => {
@@ -100,7 +89,11 @@ export default defineComponent({
     const submit = () => {
       refForm.value.validate(async valid => {
         if (valid) {
-          const r = !data.form.id ? await addApi(data.form) : await editApi(data.form)
+          const params = {
+            id: data.id,
+            value: JSON.stringify(data.form)
+          }
+          const r = await editApi(params)
           if (r) {
             data.visible = false
             ElMessage({
@@ -120,14 +113,14 @@ export default defineComponent({
      * @author: gumingchen
      */
     const dialogClosedHandle = () => {
-      refForm.value.resetFields()
+      data.form = null
+      data.keys = []
     }
 
     return {
       t,
       refForm,
       ...toRefs(data),
-      rules,
       init,
       submit,
       dialogClosedHandle

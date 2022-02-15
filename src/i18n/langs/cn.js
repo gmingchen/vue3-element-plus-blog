@@ -43,7 +43,6 @@ export default {
     title: '表格',
     headline: '标题',
     image: '图片',
-    watermarkImage: '水印图片',
     type: '类型',
     sort: '排序',
     status: '状态',

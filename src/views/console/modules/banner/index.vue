@@ -43,17 +43,6 @@
       </el-table-column>
       <el-table-column
         align="center"
-        :label="t('table.watermarkImage')"
-        prop="watermark">
-        <template #default="{ row }">
-          <el-image
-            class="img"
-            :src="row.watermark"
-            :preview-src-list="[row.watermark]" />
-        </template>
-      </el-table-column>
-      <el-table-column
-        align="center"
         :label="t('column.link')"
         prop="url" />
       <el-table-column
