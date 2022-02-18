@@ -32,12 +32,18 @@ export default {
     avatar: '头像',
     mobile: '手机号',
     sex: '性别',
+    category: '分类',
     content: '内容',
+    tag: '标签',
     target: '目标',
     sort: '排序',
     link: '链接',
     key: '键',
-    value: '值'
+    value: '值',
+    describe: '描述',
+    recommended: '是否推荐',
+    commentable: '是否可评论',
+    published: '是否发布'
   },
   table: {
     title: '表格',

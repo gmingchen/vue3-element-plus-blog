@@ -32,12 +32,18 @@ export default {
     avatar: 'Avatar',
     mobile: 'Phone number',
     sex: 'Sex',
+    category: 'Category',
     content: 'Content',
+    tag: 'Tag',
     target: 'Target',
     sort: 'Sort',
     link: 'Link',
     key: 'Key',
-    value: 'Value'
+    value: 'Value',
+    describe: 'Describe',
+    recommended: 'Is it recommended',
+    commentable: 'Is it possible to comment',
+    published: 'Whether to publish'
   },
   table: {
     title: 'Table',

@@ -77,3 +77,16 @@ export function delApi(params) {
     data: params
   })
 }
+
+/**
+ * @description: 所有标签
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function listApi() {
+  return service({
+    url: '/console/tag/list',
+    method: 'get'
+  })
+}

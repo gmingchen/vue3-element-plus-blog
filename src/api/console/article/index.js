@@ -1,5 +1,5 @@
 /*
- * @Description: 文章分类
+ * @Description: 文章
  * @Author: gumingchen
  * @Email: 1240235512@qq.com
  * @Date: 2020-12-28 16:25:18
@@ -16,7 +16,7 @@ import service from '@/utils/request'
  */
 export function pageApi(params) {
   return service({
-    url: '/console/category/page',
+    url: '/console/article/page',
     method: 'get',
     params: params
   })
@@ -30,7 +30,7 @@ export function pageApi(params) {
  */
 export function infoApi(params) {
   return service({
-    url: `/console/category/info`,
+    url: `/console/article/info`,
     method: 'get',
     params: params
   })
@@ -44,7 +44,7 @@ export function infoApi(params) {
  */
 export function addApi(params) {
   return service({
-    url: '/console/category/create',
+    url: '/console/article/create',
     method: 'post',
     data: params
   })
@@ -58,7 +58,7 @@ export function addApi(params) {
  */
 export function editApi(params) {
   return service({
-    url: '/console/category/update',
+    url: '/console/article/update',
     method: 'post',
     data: params
   })
@@ -72,21 +72,8 @@ export function editApi(params) {
  */
 export function delApi(params) {
   return service({
-    url: '/console/category/delete',
+    url: '/console/article/delete',
     method: 'post',
     data: params
-  })
-}
-
-/**
- * @description: 所有分类
- * @param {*}
- * @return {*}
- * @author: gumingchen
- */
-export function listApi() {
-  return service({
-    url: '/console/category/list',
-    method: 'get'
   })
 }
