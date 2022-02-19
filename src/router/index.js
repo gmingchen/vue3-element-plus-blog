@@ -52,7 +52,7 @@ const console = {
           path: 'writing',
           name: 'articleWriting',
           component: () => import('@/views/console/modules/article/writing/index.vue'),
-          meta: { title_cn: '写作', title_en: 'Writing' }
+          meta: { title_cn: '写作', title_en: 'Writing', keepAlive: true }
         },
         {
           path: 'category',

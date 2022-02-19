@@ -43,7 +43,7 @@
         <el-col :span="7">
           <el-row :gutter="20">
             <el-col :span="8">
-              <el-form-item :label="t('column.recommended')" prop="tags">
+              <el-form-item :label="t('column.recommended')" prop="recommended">
                 <el-switch
                   v-model="form.recommended"
                   :active-value="1"
@@ -75,7 +75,7 @@
           </el-row>
           <el-form-item :label="t('column.describe')" prop="describe">
             <el-input
-              v-model="form.title"
+              v-model="form.describe"
               type="textarea"
               :placeholder="t('column.describe')"
               :rows="6"
@@ -85,30 +85,49 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <el-form-item :label="t('table.type')" prop="type">
+        <el-radio-group v-model="form.type">
+          <el-radio :label="1">Markdown</el-radio>
+          <!-- <el-radio :label="2">Rich text</el-radio> -->
+        </el-radio-group>
+      </el-form-item>
       <el-form-item :label="t('column.content')" prop="content">
-        <md-editor v-model="form.content" />
+        {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" />
+        <md-editor
+          v-model="form.content"
+          :toolbars-exclude="mdOptions.toolbarsExclude"
+          :show-code-row-number="mdOptions.showCodeRowNumber"
+          :on-upload-img="uploadImage" />
+      </el-form-item>
+      <el-form-item>
+        <el-button v-repeat type="primary" @click="submit()">{{ t('button.save') }}</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, reactive, computed, nextTick, toRefs, onBeforeMount } from 'vue'
+import { defineComponent, ref, reactive, computed, nextTick, toRefs, onBeforeMount, onActivated } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
+import { useStore } from 'vuex'
 
+import { ElMessage } from 'element-plus'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 
 import { listApi as categoryListApi } from '@/api/console/category'
 import { listApi as tagListApi } from '@/api/console/tag'
-import { infoApi } from '@/api/console/article'
+import { infoApi, addApi, editApi } from '@/api/console/article'
+import { uploadApi } from '@/api/console/oss'
 
 export default defineComponent({
   components: { MdEditor },
   setup() {
     const { t } = useI18n()
     const route = useRoute()
+    const router = useRouter()
+    const store = useStore()
 
     const refForm = ref()
     const data = reactive({
@@ -116,9 +135,11 @@ export default defineComponent({
       loading: false,
       categories: [],
       tags: [],
+      watermark: false,
       form: {
         id: null,
         title: '',
+        type: 1,
         content: '',
         describe: '',
         category_id: '',
@@ -126,13 +147,19 @@ export default defineComponent({
         commentable: 0,
         published: 0,
         tags: []
+      },
+      mdOptions: {
+        toolbarsExclude: ['save', 'github', 'catalog', 'htmlPreview'], // 不显示的操作栏按钮
+        showCodeRowNumber: true // 是否显示行号
       }
     })
     const rules = computed(() => {
       const rule = {
         title: [{ required: true, message: t('rule.notBlank', [t('table.headline')]), trigger: 'blur' }],
         category_id: [{ required: true, message: t('rule.notBlank', [t('column.category')]), trigger: 'blur' }],
-        content: [{ required: true, message: t('rule.notBlank', [t('column.content')]), trigger: 'blur' }]
+        tags: [{ type: 'array', required: true, message: t('rule.notBlank', [t('column.tag')]), trigger: 'blur' }],
+        content: [{ required: true, message: t('rule.notBlank', [t('column.content')]), trigger: 'blur' }],
+        describe: [{ required: true, message: t('rule.notBlank', [t('column.describe')]), trigger: 'blur' }]
       }
       nextTick(() => {
         refForm.value.clearValidate()
@@ -169,31 +196,120 @@ export default defineComponent({
     /**
      * @description: 获取文章详情
      * @param {*} id 文章ID
+     * @param {Number} rout 目标路由
      * @return {*}
      * @author: gumingchen
      */
-    const getInfo = (id) => {
+    const getInfo = async (id, rout) => {
       if (id) {
-        infoApi(id).then(r => {
+        await infoApi({ id }).then(r => {
           if (r) {
-            //
+            data.form.title = r.data.title
+            data.form.type = r.data.type
+            data.form.content = r.data.content
+            data.form.describe = r.data.describe
+            data.form.category_id = r.data.category_id
+            data.form.recommended = r.data.recommended
+            data.form.commentable = r.data.commentable
+            data.form.published = r.data.published
+            data.form.tags = r.data.tags.map(item => item.id)
+            store.dispatch('tabs/updateTabTitle', { route: rout, title: data.form.title })
           }
         })
       }
     }
 
-    onBeforeMount(async () => {
+    /**
+     * @description: md图片上传
+     * @param {*} files 图片列表
+     * @param {*} callback 回调函数
+     * @return {*}
+     * @author: gumingchen
+     */
+    const uploadImage = async (files, callback) => {
+      const arr = await Promise.all(
+        Array.from(files).map(file => {
+          return uploadApi(file, data.watermark)
+        })
+      )
+      callback(arr.map(res => res.data.url))
+    }
+
+    /**
+     * @description: 初始化页面数据
+     * @param {Number} id 文章ID
+     * @param {Number} rout 目标路由
+     * @return {*}
+     * @Author: gumingchen
+     */
+    const init = async (id, rout) => {
+      data.loading = true
       await getCategory()
       await getTag()
-      getInfo(route.query.id)
+      await getInfo(id, rout)
+      nextTick(() => {
+        data.loading = false
+      })
+    }
+
+    /**
+     * @description: 表单验证提交
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const submit = () => {
+      refForm.value.validate(async valid => {
+        if (valid) {
+          const params = {
+            ...data.form
+          }
+          params.content = encodeURI(params.content)
+          const r = !data.form.id ? await addApi(params) : await editApi(params)
+          if (r) {
+            if (r.data) {
+              data.form.id = r.data
+              router.push({ name: 'articleWriting', query: { id: data.form.id } })
+            } else {
+              store.dispatch('tabs/updateTabTitle', { route: route, title: data.form.title })
+            }
+            data.visible = false
+            ElMessage({
+              message: t('tip.success'),
+              type: 'success'
+            })
+          }
+        }
+      })
+    }
+
+    /**
+     * @description: 路由变化之前的事件
+     * @param {Object} to 跳转路由对象
+     * @return {*}
+     * @Author: gumingchen
+     */
+    onBeforeRouteUpdate((to) => {
+      refForm.value.resetFields()
+      init(to.query.id, to)
     })
+
+    onActivated(() => {
+      console.log(123)
+    })
+
+    onBeforeMount(() => {
+      init(route.query.id, route)
+    })
+
     return {
       t,
       refForm,
       ...toRefs(data),
-      rules
+      rules,
+      uploadImage,
+      submit
     }
   }
 })
 </script>
-

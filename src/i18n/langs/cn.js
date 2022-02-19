@@ -20,6 +20,7 @@ export default {
     detail: '详情',
     reply: '回复',
     confirm: '确认',
+    save: '保存',
     set: '设置',
     cancel: '取消',
     close: '关闭'
@@ -43,7 +44,8 @@ export default {
     describe: '描述',
     recommended: '是否推荐',
     commentable: '是否可评论',
-    published: '是否发布'
+    published: '是否发布',
+    watermark: '水印'
   },
   table: {
     title: '表格',

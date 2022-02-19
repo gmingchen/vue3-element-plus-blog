@@ -40,6 +40,16 @@ export default {
     },
     REMOVE_TAB: (state, index) => {
       state.list.splice(index, 1)
+    },
+    UPDATE_TAB_TITLE: (state, { value, title }) => {
+      for (let i = 0; i < state.list.length; i++) {
+        const tab = state.list[i]
+        if (tab.value === value) {
+          tab.title_cn = `文章-${ title }`
+          tab.title_en = `Article-${ title }`
+          return
+        }
+      }
     }
   },
   actions: {
@@ -80,6 +90,13 @@ export default {
         commit('SET_ACTIVE', tab.value)
         router.push({ name: tab.name })
       }
+    },
+    updateTabTitle({ commit }, { route, title }) {
+      const name = route.name
+      const queryStr = JSON.stringify(route.query)
+      const paramsStr = JSON.stringify(route.params)
+      const value = `${ name }-${ queryStr }-${ paramsStr }`
+      commit('UPDATE_TAB_TITLE', { value, title })
     }
   }
 }

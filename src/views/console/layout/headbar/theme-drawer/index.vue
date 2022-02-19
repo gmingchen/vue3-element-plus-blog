@@ -302,7 +302,7 @@ export default defineComponent({
 <style lang="scss">
 .console-theme-form {
   .el-form-item {
-    margin-bottom: 0;
+    margin-bottom: 5px;
   }
   .el-form-item__content {
     display: inline;

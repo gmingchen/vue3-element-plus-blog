@@ -29,10 +29,7 @@
       </el-form-item>
       <el-form-item :label="t('table.image')" prop="image">
         <div>
-          <el-switch
-            v-model="watermark"
-            active-text="添加水印"
-            inactive-text="取消水印" />
+          {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" />
           <Upload v-model:url="form.image" :watermark="watermark" />
         </div>
 

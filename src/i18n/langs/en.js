@@ -20,6 +20,7 @@ export default {
     detail: 'Detail',
     reply: 'Reply',
     confirm: 'Confirm',
+    save: 'Save',
     set: 'Set',
     cancel: 'Cancel',
     close: 'Close'
@@ -43,7 +44,8 @@ export default {
     describe: 'Describe',
     recommended: 'Is it recommended',
     commentable: 'Is it possible to comment',
-    published: 'Whether to publish'
+    published: 'Whether to publish',
+    watermark: 'Watermark'
   },
   table: {
     title: 'Table',

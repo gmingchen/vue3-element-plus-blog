@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { computed, defineComponent, onBeforeMount } from 'vue'
+import { computed, defineComponent, onBeforeMount, nextTick } from 'vue'
 import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { useStore } from 'vuex'
 
@@ -45,7 +45,11 @@ export default defineComponent({
      */
     const clickHandle = ({ index }) => {
       const tab = tabs.value[index]
-      router.push({ name: tab.name })
+      router.push({
+        name: tab.name,
+        query: tab.query,
+        params: tab.params
+      })
     }
 
     /**
@@ -66,11 +70,17 @@ export default defineComponent({
      */
     onBeforeRouteUpdate((to) => {
       store.dispatch('tabs/changeHandle', to)
+      const meta = to.meta
+      if (meta.multiple) {
+        store.dispatch('console/setRefresh', true)
+        nextTick(() => {
+          store.dispatch('console/setRefresh', false)
+        })
+      }
     })
 
     /**
      * @description: 载入事件：设置tabs
-     * @param {Object} to 跳转路由对象
      * @return {*}
      * @Author: gumingchen
      */
