@@ -1,21 +1,389 @@
 <template>
   <div>
-    1
-    <el-button type="primary">primary</el-button>
-    <el-button type="success">success</el-button>
-    <el-button type="warning">warning</el-button>
-    <el-button type="danger">danger</el-button>
+    <el-form ref="refForm" :inline="true" @keyup.enter="reacquireHandle()">
+      <el-form-item>
+        <el-input v-model="form.title" :placeholder="t('table.headline')" clearable />
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="form.category_ids" multiple :placeholder="t('column.category')">
+          <el-option
+            v-for="item in categories"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="form.recommended" :placeholder="t('column.recommended')">
+          <el-option :label="t('button.yes')" :value="1" />
+          <el-option :label="t('button.no')" :value="0" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="form.commentable" :placeholder="t('column.commentable')">
+          <el-option :label="t('button.yes')" :value="1" />
+          <el-option :label="t('button.no')" :value="0" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="form.published" :placeholder="t('column.published')">
+          <el-option :label="t('button.yes')" :value="1" />
+          <el-option :label="t('button.no')" :value="0" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-date-picker
+          v-model="form.date"
+          type="daterange"
+          range-separator="-"
+          :start-placeholder="t('tip.startTime')"
+          :end-placeholder="t('tip.endTime')"
+          clearable />
+      </el-form-item>
+      <el-form-item>
+        <el-button v-repeat @click="reacquireHandle()">{{ t('button.search') }}</el-button>
+        <el-button v-repeat @click="clearJson(form), reacquireHandle()">{{ t('button.reset') }}</el-button>
+        <el-button v-repeat type="primary" @click="addEditHandle()">{{ t('button.add') }}</el-button>
+        <el-button
+          v-repeat
+          type="danger"
+          :disabled="selection.length <= 0"
+          @click="delHandle()">{{ t('button.batch', [t('button.delete')]) }}</el-button>
+      </el-form-item>
+    </el-form>
+    <el-table
+      v-loading="loading"
+      border
+      :data="list"
+      @selection-change="selectionHandle">
+      <el-table-column align="center" type="selection" width="50" />
+      <el-table-column
+        align="center"
+        label="ID"
+        prop="id"
+        width="80" />
+      <el-table-column
+        align="center"
+        :label="t('table.headline')"
+        prop="title"
+        width="150" />
+      <el-table-column
+        align="center"
+        :label="t('column.describe')"
+        prop="describe"
+        width="350"
+        show-overflow-tooltip />
+      <el-table-column
+        align="center"
+        :label="t('column.category')"
+        prop="category_name"
+        width="150" />
+      <el-table-column
+        align="center"
+        :label="t('column.tag')"
+        prop="tags"
+        width="300"
+        show-overflow-tooltip>
+        <template #default="{ row }">
+          <el-tag v-for="item in row.tags" :key="item.id" class="tag">
+            {{ item.name }}
+          </el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.recommended')"
+        prop="recommended"
+        width="100">
+        <template #default="{ row }">
+          <el-switch
+            v-model="row.recommended"
+            :active-value="1"
+            :inactive-value="0"
+            @change="statusHandle('recommended', row)" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.commentable')"
+        prop="commentable"
+        width="100">
+        <template #default="{ row }">
+          <el-switch
+            v-model="row.commentable"
+            :active-value="1"
+            :inactive-value="0"
+            @change="statusHandle('commentable', row)" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('column.published')"
+        prop="published"
+        width="100">
+        <template #default="{ row }">
+          <el-switch
+            v-model="row.published"
+            :active-value="1"
+            :inactive-value="0"
+            @change="statusHandle('published', row)" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        :label="t('table.createTime')"
+        prop="created_at"
+        width="160" />
+      <el-table-column
+        align="center"
+        :label="t('table.updateTime')"
+        prop="updated_at"
+        width="160" />
+      <el-table-column
+        align="center"
+        :label="t('table.operation')"
+        width="110"
+        fixed="right">
+        <template #default="{ row }">
+          <el-button
+            type="text"
+            @click="editHandle(row.id)">{{ t('button.edit') }}</el-button>
+          <el-button
+            type="text"
+            @click="delHandle(row.id)">{{ t('button.delete') }}</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <g-page :page="page" @change="pageChangeHandle" />
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, ref, toRefs, nextTick, onBeforeMount } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+
+import { ElMessage, ElMessageBox } from 'element-plus'
+
+import usePage from '@/mixins/page'
+import { clearJson, parseDate2Str } from '@/utils'
+
+import { listApi as categoryListApi } from '@/api/console/category'
+import { pageApi, delApi, recommendedApi, commentableApi, publishedApi } from '@/api/console/article'
 
 export default defineComponent({
+  components: { },
   setup() {
+    const { t } = useI18n()
+    const router = useRouter()
+
+    const refForm = ref()
+    const refAddEdit = ref()
+    const { page } = usePage()
+    const data = reactive({
+      loading: false,
+      visible: false,
+      categories: [],
+      form: {
+        title: '',
+        category_ids: [],
+        tag_ids: [],
+        recommended: '',
+        commentable: '',
+        published: '',
+        date: []
+      },
+      list: [],
+      selection: []
+    })
+
+    /**
+     * @description: 获取分类
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const getCategory = async () => {
+      const r = await categoryListApi()
+      if (r) {
+        data.categories = r.data
+      }
+    }
+
+    /**
+     * @description: 获取分页列表
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const getList = () => {
+      const params = {
+        title: data.form.title,
+        category_ids: data.form.category_ids,
+        tag_ids: data.form.tag_ids,
+        recommended: data.form.recommended,
+        commentable: data.form.commentable,
+        published: data.form.published,
+        start: data.form.date && data.form.date.length ? parseDate2Str(data.form.date[0]) : '',
+        end: data.form.date && data.form.date.length ? parseDate2Str(data.form.date[1]) : '',
+        current: page.current,
+        size: page.size
+      }
+      data.loading = true
+      pageApi(params).then(r => {
+        if (r) {
+          data.list = r.data.list
+          page.total = r.data.total
+        }
+        nextTick(() => {
+          data.loading = false
+        })
+      })
+    }
+
+    /**
+     * @description: 重新获取、重置 数据
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const reacquireHandle = () => {
+      page.current = 1
+      getList()
+    }
+
+    /**
+     * @description: 新增/编辑弹窗
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const editHandle = id => {
+      router.push({
+        name: 'articleWriting',
+        query: { id }
+      })
+    }
+
+    /**
+     * @description: 删除
+     * @param {number} id
+     * @return {*}
+     * @author: gumingchen
+     */
+    const delHandle = id => {
+      let params
+      if (id) {
+        params = [id]
+      } else {
+        params = data.selection.map(item => item.id)
+      }
+      ElMessageBox.confirm(t('tip.confirmOperationTip', [params.join(','), id ? t('button.delete') : t('button.batch', [t('button.delete')])]), t('tip.title'), {
+        confirmButtonText: t('button.confirm'),
+        cancelButtonText: t('button.cancel'),
+        type: 'warning'
+      }).then(() => {
+        delApi(params).then(r => {
+          if (r) {
+            ElMessage({
+              message: t('tip.success'),
+              type: 'success'
+            })
+            getList()
+          }
+        })
+      })
+        .catch(() => {
+        // to do something on canceled
+        })
+    }
+
+    /**
+     * @description: 状态切换
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const statusHandle = async (type, row) => {
+      if (row.id) {
+        const params = {
+          key: row.id,
+          value: ''
+        }
+        let r
+        switch (type) {
+          case 'recommended':
+            params.value = row.recommended
+            r = await recommendedApi(params)
+            break
+          case 'commentable':
+            params.value = row.commentable
+            r = await commentableApi(params)
+            break
+          case 'published':
+            params.value = row.published
+            r = await publishedApi(params)
+            break
+        }
+        if (r) {
+          ElMessage({
+            message: t('tip.success'),
+            type: 'success'
+          })
+        } else {
+          row.is_display = row.is_display === 1 ? 0 : 1
+        }
+      }
+    }
+
+    /**
+     * @description: table多选事件
+     * @param {*} val
+     * @return {*}
+     * @author: gumingchen
+     */
+    const selectionHandle = val => {
+      data.selection = val
+    }
+
+    /**
+     * @description: 分页变化事件
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const pageChangeHandle = argPage => {
+      page.current = argPage.current
+      page.size = argPage.size
+      getList()
+    }
+
+    onBeforeMount(() => {
+      getCategory()
+      getList()
+    })
+
     return {
+      t,
+      refForm,
+      refAddEdit,
+      page,
+      ...toRefs(data),
+      getList,
+      reacquireHandle,
+      editHandle,
+      delHandle,
+      statusHandle,
+      selectionHandle,
+      pageChangeHandle,
+      clearJson
     }
   }
 })
 </script>
 
+<style lang="scss" scoped>
+.tag {
+  margin-right: 5px;
+}
+</style>

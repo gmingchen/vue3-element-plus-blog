@@ -17,8 +17,8 @@ import service from '@/utils/request'
 export function pageApi(params) {
   return service({
     url: '/console/article/page',
-    method: 'get',
-    params: params
+    method: 'post',
+    data: params
   })
 }
 
@@ -73,6 +73,48 @@ export function editApi(params) {
 export function delApi(params) {
   return service({
     url: '/console/article/delete',
+    method: 'post',
+    data: params
+  })
+}
+
+/**
+ * @description: 是否推荐
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function recommendedApi(params) {
+  return service({
+    url: '/console/article/recommended',
+    method: 'post',
+    data: params
+  })
+}
+
+/**
+ * @description: 是否可评论
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function commentableApi(params) {
+  return service({
+    url: '/console/article/commentable',
+    method: 'post',
+    data: params
+  })
+}
+
+/**
+ * @description: 是否发布
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function publishedApi(params) {
+  return service({
+    url: '/console/article/published',
     method: 'post',
     data: params
   })

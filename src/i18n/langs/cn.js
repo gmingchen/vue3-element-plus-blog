@@ -23,7 +23,9 @@ export default {
     save: '保存',
     set: '设置',
     cancel: '取消',
-    close: '关闭'
+    close: '关闭',
+    yes: '是',
+    no: '否'
   },
   column: {
     title: '列',

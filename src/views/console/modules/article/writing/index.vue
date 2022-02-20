@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, computed, nextTick, toRefs, onBeforeMount, onActivated } from 'vue'
+import { defineComponent, ref, reactive, computed, nextTick, toRefs, onBeforeMount } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { useStore } from 'vuex'
@@ -162,7 +162,9 @@ export default defineComponent({
         describe: [{ required: true, message: t('rule.notBlank', [t('column.describe')]), trigger: 'blur' }]
       }
       nextTick(() => {
-        refForm.value.clearValidate()
+        if (refForm.value) {
+          refForm.value.clearValidate()
+        }
       })
       return rule
     })
@@ -292,10 +294,6 @@ export default defineComponent({
     onBeforeRouteUpdate((to) => {
       refForm.value.resetFields()
       init(to.query.id, to)
-    })
-
-    onActivated(() => {
-      console.log(123)
     })
 
     onBeforeMount(() => {

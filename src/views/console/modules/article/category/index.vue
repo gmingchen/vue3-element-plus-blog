@@ -154,7 +154,7 @@ export default defineComponent({
         cancelButtonText: t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        delApi({ ids: params }).then(r => {
+        delApi(params).then(r => {
           if (r) {
             ElMessage({
               message: t('tip.success'),

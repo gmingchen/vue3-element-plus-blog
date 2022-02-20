@@ -23,7 +23,9 @@ export default {
     save: 'Save',
     set: 'Set',
     cancel: 'Cancel',
-    close: 'Close'
+    close: 'Close',
+    yes: 'Yes',
+    no: 'No'
   },
   column: {
     title: 'Column',
