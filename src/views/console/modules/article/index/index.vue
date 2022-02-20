@@ -147,7 +147,7 @@
         <template #default="{ row }">
           <el-button
             type="text"
-            @click="editHandle(row.id)">{{ t('button.edit') }}</el-button>
+            @click="addEditHandle(row.id)">{{ t('button.edit') }}</el-button>
           <el-button
             type="text"
             @click="delHandle(row.id)">{{ t('button.delete') }}</el-button>
@@ -258,7 +258,7 @@ export default defineComponent({
      * @return {*}
      * @author: gumingchen
      */
-    const editHandle = id => {
+    const addEditHandle = id => {
       router.push({
         name: 'articleWriting',
         query: { id }
@@ -371,7 +371,7 @@ export default defineComponent({
       ...toRefs(data),
       getList,
       reacquireHandle,
-      editHandle,
+      addEditHandle,
       delHandle,
       statusHandle,
       selectionHandle,
