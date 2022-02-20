@@ -85,7 +85,7 @@
         width="300"
         show-overflow-tooltip>
         <template #default="{ row }">
-          <el-tag v-for="item in row.tags" :key="item.id" class="tag">
+          <el-tag v-for="item in row.tags" :key="item.id" class="margin_r-5">
             {{ item.name }}
           </el-tag>
         </template>
@@ -381,9 +381,3 @@ export default defineComponent({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.tag {
-  margin-right: 5px;
-}
-</style>
