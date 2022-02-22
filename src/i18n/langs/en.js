@@ -98,7 +98,7 @@ export default {
     comments: 'comments',
     readings: 'readings',
     messages: 'messages',
-    developments: 'New developments',
-    log: 'New log'
+    developments: 'Latest developments',
+    log: 'Latest log'
   }
 }

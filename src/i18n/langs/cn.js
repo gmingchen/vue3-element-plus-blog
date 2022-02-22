@@ -98,7 +98,7 @@ export default {
     comments: '评论',
     readings: '阅读',
     messages: '留言',
-    developments: '新动态',
-    log: '新日志'
+    developments: '最新动态',
+    log: '最新日志'
   }
 }
