@@ -25,7 +25,8 @@ export default {
     cancel: '取消',
     close: '关闭',
     yes: '是',
-    no: '否'
+    no: '否',
+    comment: '评论'
   },
   column: {
     title: '列',

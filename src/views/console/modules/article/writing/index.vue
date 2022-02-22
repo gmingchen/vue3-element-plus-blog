@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, computed, nextTick, toRefs, onBeforeMount } from 'vue'
+import { defineComponent, ref, reactive, computed, nextTick, toRefs, onActivated } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { useStore } from 'vuex'
@@ -296,7 +296,8 @@ export default defineComponent({
       init(to.query.id, to)
     })
 
-    onBeforeMount(() => {
+    onActivated(() => {
+      refForm.value.resetFields()
       init(route.query.id, route)
     })
 

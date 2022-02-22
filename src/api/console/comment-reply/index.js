@@ -1,5 +1,5 @@
 /*
- * @Description: 留言回复
+ * @Description: 文章评论回复
  * @Author: gumingchen
  * @Email: 1240235512@qq.com
  * @Date: 2020-12-28 16:25:18
@@ -16,7 +16,7 @@ import service from '@/utils/request'
  */
 export function replyPageApi(params) {
   return service({
-    url: '/console/leaveMessageReply/page',
+    url: '/console/commentReply/page',
     method: 'get',
     params: params
   })
@@ -30,7 +30,7 @@ export function replyPageApi(params) {
  */
 export function replyAddApi(params) {
   return service({
-    url: '/console/leaveMessageReply/create',
+    url: '/console/commentReply/create',
     method: 'post',
     data: params
   })
@@ -44,7 +44,7 @@ export function replyAddApi(params) {
  */
 export function replyDelApi(params) {
   return service({
-    url: '/console/leaveMessageReply/delete',
+    url: '/console/commentReply/delete',
     method: 'post',
     data: params
   })

@@ -25,7 +25,8 @@ export default {
     cancel: 'Cancel',
     close: 'Close',
     yes: 'Yes',
-    no: 'No'
+    no: 'No',
+    comment: 'Comment'
   },
   column: {
     title: 'Column',

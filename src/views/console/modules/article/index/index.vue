@@ -94,7 +94,7 @@
         align="center"
         :label="t('column.recommended')"
         prop="recommended"
-        width="100">
+        width="160">
         <template #default="{ row }">
           <el-switch
             v-model="row.recommended"
@@ -107,7 +107,7 @@
         align="center"
         :label="t('column.commentable')"
         prop="commentable"
-        width="100">
+        width="195">
         <template #default="{ row }">
           <el-switch
             v-model="row.commentable"
@@ -120,7 +120,7 @@
         align="center"
         :label="t('column.published')"
         prop="published"
-        width="100">
+        width="160">
         <template #default="{ row }">
           <el-switch
             v-model="row.published"
@@ -142,9 +142,12 @@
       <el-table-column
         align="center"
         :label="t('table.operation')"
-        width="110"
+        width="190"
         fixed="right">
         <template #default="{ row }">
+          <el-button
+            type="text"
+            @click="commentHandle(row.id)">{{ t('button.comment') }}</el-button>
           <el-button
             type="text"
             @click="addEditHandle(row.id)">{{ t('button.edit') }}</el-button>
@@ -155,6 +158,7 @@
       </el-table-column>
     </el-table>
     <g-page :page="page" @change="pageChangeHandle" />
+    <Comment v-if="visible" ref="refComment" />
   </div>
 </template>
 
@@ -164,6 +168,7 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
 import { ElMessage, ElMessageBox } from 'element-plus'
+import Comment from './components/comment.vue'
 
 import usePage from '@/mixins/page'
 import { clearJson, parseDate2Str } from '@/utils'
@@ -172,13 +177,13 @@ import { listApi as categoryListApi } from '@/api/console/category'
 import { pageApi, delApi, recommendedApi, commentableApi, publishedApi } from '@/api/console/article'
 
 export default defineComponent({
-  components: { },
+  components: { Comment },
   setup() {
     const { t } = useI18n()
     const router = useRouter()
 
     const refForm = ref()
-    const refAddEdit = ref()
+    const refComment = ref()
     const { page } = usePage()
     const data = reactive({
       loading: false,
@@ -250,6 +255,19 @@ export default defineComponent({
     const reacquireHandle = () => {
       page.current = 1
       getList()
+    }
+
+    /**
+     * @description: 评论弹窗
+     * @param {*}
+     * @return {*}
+     * @author: gumingchen
+     */
+    const commentHandle = id => {
+      data.visible = true
+      nextTick(() => {
+        refComment.value.init(id)
+      })
     }
 
     /**
@@ -366,11 +384,12 @@ export default defineComponent({
     return {
       t,
       refForm,
-      refAddEdit,
+      refComment,
       page,
       ...toRefs(data),
       getList,
       reacquireHandle,
+      commentHandle,
       addEditHandle,
       delHandle,
       statusHandle,

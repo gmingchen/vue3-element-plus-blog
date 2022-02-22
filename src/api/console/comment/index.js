@@ -1,5 +1,5 @@
 /*
- * @Description: 留言回复
+ * @Description: 文字评论
  * @Author: gumingchen
  * @Email: 1240235512@qq.com
  * @Date: 2020-12-28 16:25:18
@@ -14,25 +14,11 @@ import service from '@/utils/request'
  * @return {*}
  * @author: gumingchen
  */
-export function replyPageApi(params) {
+export function pageApi(params) {
   return service({
-    url: '/console/leaveMessageReply/page',
+    url: '/console/comment/page',
     method: 'get',
     params: params
-  })
-}
-
-/**
- * @description: 新增
- * @param {*}
- * @return {*}
- * @author: gumingchen
- */
-export function replyAddApi(params) {
-  return service({
-    url: '/console/leaveMessageReply/create',
-    method: 'post',
-    data: params
   })
 }
 
@@ -42,9 +28,9 @@ export function replyAddApi(params) {
  * @return {*}
  * @author: gumingchen
  */
-export function replyDelApi(params) {
+export function delApi(params) {
   return service({
-    url: '/console/leaveMessageReply/delete',
+    url: '/console/comment/delete',
     method: 'post',
     data: params
   })
