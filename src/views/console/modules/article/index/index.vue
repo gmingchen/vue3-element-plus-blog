@@ -69,6 +69,14 @@
         width="150" />
       <el-table-column
         align="center"
+        :label="t('column.cover')"
+        prop="cover">
+        <template #default="{ row }">
+          <el-image :src="row.cover" :preview-src-list="[row.cover]" />
+        </template>
+      </el-table-column>
+      <el-table-column
+        align="center"
         :label="t('column.describe')"
         prop="describe"
         width="350"

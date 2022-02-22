@@ -48,7 +48,8 @@ export default {
     recommended: '是否推荐',
     commentable: '是否可评论',
     published: '是否发布',
-    watermark: '水印'
+    watermark: '水印',
+    cover: '封面图'
   },
   table: {
     title: '表格',

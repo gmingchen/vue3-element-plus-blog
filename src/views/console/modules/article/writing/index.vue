@@ -8,7 +8,7 @@
       label-position="top"
       @keyup.enter="submit()">
       <el-row :gutter="20">
-        <el-col :span="5">
+        <el-col :span="6">
           <el-form-item :label="t('table.headline')" prop="title">
             <el-input
               v-model="form.title"
@@ -39,8 +39,6 @@
                 :value="item.id" />
             </el-select>
           </el-form-item>
-        </el-col>
-        <el-col :span="7">
           <el-row :gutter="20">
             <el-col :span="8">
               <el-form-item :label="t('column.recommended')" prop="recommended">
@@ -73,6 +71,20 @@
               </el-form-item>
             </el-col>
           </el-row>
+          <el-form-item :label="t('table.type')" prop="type">
+            <el-radio-group v-model="form.type">
+              <el-radio :label="1">Markdown</el-radio>
+              <!-- <el-radio :label="2">Rich text</el-radio> -->
+            </el-radio-group>
+          </el-form-item>
+        </el-col>
+        <el-col :span="7">
+          <el-form-item :label="t('column.cover')" prop="image">
+            <div>
+              <!-- {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="coverWatermark" /> -->
+              <Upload v-model:url="form.cover" :watermark="coverWatermark" />
+            </div>
+          </el-form-item>
           <el-form-item :label="t('column.describe')" prop="describe">
             <el-input
               v-model="form.describe"
@@ -85,14 +97,8 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-form-item :label="t('table.type')" prop="type">
-        <el-radio-group v-model="form.type">
-          <el-radio :label="1">Markdown</el-radio>
-          <!-- <el-radio :label="2">Rich text</el-radio> -->
-        </el-radio-group>
-      </el-form-item>
       <el-form-item :label="t('column.content')" prop="content">
-        {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" />
+        <!-- {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" /> -->
         <md-editor
           v-model="form.content"
           :toolbars-exclude="mdOptions.toolbarsExclude"
@@ -113,6 +119,7 @@ import { useRoute, useRouter, onBeforeRouteUpdate } from 'vue-router'
 import { useStore } from 'vuex'
 
 import { ElMessage } from 'element-plus'
+import Upload from '@/components/upload/index.vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
 
@@ -122,7 +129,7 @@ import { infoApi, addApi, editApi } from '@/api/console/article'
 import { uploadApi } from '@/api/console/oss'
 
 export default defineComponent({
-  components: { MdEditor },
+  components: { Upload, MdEditor },
   setup() {
     const { t } = useI18n()
     const route = useRoute()
@@ -135,6 +142,7 @@ export default defineComponent({
       loading: false,
       categories: [],
       tags: [],
+      coverWatermark: false,
       watermark: false,
       form: {
         id: null,
@@ -143,6 +151,7 @@ export default defineComponent({
         content: '',
         describe: '',
         category_id: '',
+        cover: '',
         recommended: 0,
         commentable: 0,
         published: 0,
@@ -211,6 +220,7 @@ export default defineComponent({
             data.form.content = r.data.content
             data.form.describe = r.data.describe
             data.form.category_id = r.data.category_id
+            data.form.cover = r.data.cover
             data.form.recommended = r.data.recommended
             data.form.commentable = r.data.commentable
             data.form.published = r.data.published

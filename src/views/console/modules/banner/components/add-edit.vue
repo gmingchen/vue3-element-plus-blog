@@ -29,10 +29,9 @@
       </el-form-item>
       <el-form-item :label="t('table.image')" prop="image">
         <div>
-          {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" />
+          <!-- {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" /> -->
           <Upload v-model:url="form.image" :watermark="watermark" />
         </div>
-
       </el-form-item>
       <el-form-item :label="t('table.type')" prop="type">
         <el-radio-group v-model="form.type">

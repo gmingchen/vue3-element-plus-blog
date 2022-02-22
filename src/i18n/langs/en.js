@@ -48,7 +48,8 @@ export default {
     recommended: 'Is it recommended',
     commentable: 'Is it possible to comment',
     published: 'Whether to publish',
-    watermark: 'Watermark'
+    watermark: 'Watermark',
+    cover: 'Cover'
   },
   table: {
     title: 'Table',
