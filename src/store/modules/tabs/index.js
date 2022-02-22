@@ -13,17 +13,17 @@ import router from '@/router'
 // todo: c: 多开的时候需要
 
 const defaultTabs = [{
-  value: 'dataOverview-{}-{}',
-  title_cn: '数据概况',
-  title_en: 'Data overview',
-  name: 'dataOverview',
+  value: 'dashboard-{}-{}',
+  title_cn: '仪表盘',
+  title_en: 'Dashboard',
+  name: 'dashboard',
   query: {}, // 路由参数
   params: {} // 路由参数
 }]
 
 export default {
   state: {
-    active: 'dataOverview-{}-{}',
+    active: 'dashboard-{}-{}',
     list: defaultTabs
   },
   getters: {

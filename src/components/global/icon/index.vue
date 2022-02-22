@@ -43,7 +43,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '//at.alicdn.com/t/font_2727717_vwk989te0l.css';
+@import '//at.alicdn.com/t/font_2727717_ms3ludtji2.css';
 i {
   padding: 0 5px;
 }

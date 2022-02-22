@@ -25,15 +25,15 @@ const client = {
 const console = {
   path: '/console',
   name: 'console',
-  redirect: { name: 'dataOverview' },
+  redirect: { name: 'dashboard' },
   component: () => import('@/views/console/layout/index.vue'),
   meta: { title_cn: '布局' },
   children: [
     {
-      path: 'data-overview',
-      name: 'dataOverview',
-      component: () => import('@/views/console/modules/data-overview/index.vue'),
-      meta: { title_cn: '数据概况', title_en: 'Data overview' }
+      path: 'dashboard',
+      name: 'dashboard',
+      component: () => import('@/views/console/modules/dashboard/index.vue'),
+      meta: { title_cn: '仪表盘', title_en: 'Dashboard' }
     },
     {
       path: 'article',
@@ -52,7 +52,7 @@ const console = {
           path: 'writing',
           name: 'articleWriting',
           component: () => import('@/views/console/modules/article/writing/index.vue'),
-          meta: { title_cn: '写作', title_en: 'Writing', keepAlive: true }
+          meta: { title_cn: '写作', title_en: 'Writing', keepAlive: false }
         },
         {
           path: 'category',

@@ -91,6 +91,14 @@ export default {
       sidebarBackgroundColor: '侧边栏背景色',
       menuTextColor: '菜单字体色',
       menuActiveTextColor: '菜单选中字体色'
-    }
+    },
+    number: '{0}数量',
+    articles: '文章',
+    releases: '发布',
+    comments: '评论',
+    readings: '阅读',
+    messages: '留言',
+    developments: '新动态',
+    log: '新日志'
   }
 }

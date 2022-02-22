@@ -173,7 +173,7 @@
 <script>
 import { defineComponent, reactive, ref, toRefs, nextTick, onBeforeMount } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import { ElMessage, ElMessageBox } from 'element-plus'
 import Comment from './components/comment.vue'
@@ -188,6 +188,7 @@ export default defineComponent({
   components: { Comment },
   setup() {
     const { t } = useI18n()
+    const route = useRoute()
     const router = useRouter()
 
     const refForm = ref()
@@ -385,6 +386,7 @@ export default defineComponent({
     }
 
     onBeforeMount(() => {
+      data.form.published = +route.params.published || ''
       getCategory()
       getList()
     })

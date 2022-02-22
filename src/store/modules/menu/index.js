@@ -1,8 +1,8 @@
 export default {
   state: {
-    active: 'dataOverview', // 菜单选中
+    active: 'dashboard', // 菜单选中
     list: [
-      { value: 'dataOverview', label_cn: '数据概况', label_en: 'Data overview', icon: 'statistics' },
+      { value: 'dashboard', label_cn: '仪表盘', label_en: 'dashboard', icon: 'dashboard' },
       {
         value: 'article',
         label_cn: '文章管理',

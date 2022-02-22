@@ -91,6 +91,14 @@ export default {
       sidebarBackgroundColor: 'Sidebar background color',
       menuTextColor: 'Menu font color',
       menuActiveTextColor: 'Menu selected font color'
-    }
+    },
+    number: 'Number of {0}',
+    articles: 'articles',
+    releases: 'releases',
+    comments: 'comments',
+    readings: 'readings',
+    messages: 'messages',
+    developments: 'New developments',
+    log: 'New log'
   }
 }
