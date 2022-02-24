@@ -2,7 +2,25 @@
   <div>
     <el-form ref="refForm" :inline="true" @keyup.enter="reacquireHandle()">
       <el-form-item>
-        <el-input v-model="form.name" :placeholder="`${t('column.username')} / ${t('column.nickname')}`" clearable />
+        <el-input
+          v-model="form.name"
+          :placeholder="`${t('column.username')} / ${t('column.nickname')}`"
+          maxlength="20"
+          clearable />
+      </el-form-item>
+      <el-form-item>
+        <el-input
+          v-model="form.ip"
+          placeholder="IP"
+          maxlength="20"
+          clearable />
+      </el-form-item>
+      <el-form-item>
+        <el-input
+          v-model="form.operation"
+          :placeholder="t('column.operation')"
+          maxlength="20"
+          clearable />
       </el-form-item>
       <el-form-item>
         <el-date-picker
@@ -16,6 +34,7 @@
       <el-form-item>
         <el-button v-repeat @click="reacquireHandle()">{{ t('button.search') }}</el-button>
         <el-button v-repeat @click="clearJson(form), reacquireHandle()">{{ t('button.reset') }}</el-button>
+        <el-button v-repeat type="danger" @click="clearHandle()">{{ t('button.clear') }}</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -26,71 +45,69 @@
         align="center"
         label="ID"
         prop="id"
-        width="80">
-        <template #default="{row}">
-          <icon
-            v-if="row.author"
-            name="author"
-            class="author-icon"
-            size="20px" />
-          {{ row.id }}
-        </template>
-      </el-table-column>
+        width="80" />
       <el-table-column
         align="center"
-        :label="t('column.avatar')"
-        prop="avatar"
-        width="90">
+        :label="`${t('column.username')} / ${t('column.nickname')}`"
+        prop="username"
+        min-width="160"
+        show-overflow-tooltip>
         <template #default="{ row }">
-          <el-avatar :src="row.avatar" />
+          {{ row.username || row.nickname || '-' }}
         </template>
       </el-table-column>
       <el-table-column
         align="center"
-        :label="t('column.username')"
-        prop="username" />
+        :label="t('column.operation')"
+        prop="operation"
+        min-width="100"
+        show-overflow-tooltip />
       <el-table-column
         align="center"
-        :label="t('column.nickname')"
-        prop="nickname" />
+        label="URL"
+        prop="url"
+        min-width="150"
+        show-overflow-tooltip />
       <el-table-column
         align="center"
-        :label="t('column.mobile')"
-        prop="mobile" />
+        :label="t('column.requestMethod')"
+        prop="method"
+        width="140" />
       <el-table-column
         align="center"
-        :label="t('column.sex')"
-        prop="sex">
-        <template #default="{row}">
-          {{ SEX.getLabel(row.sex) }}
-        </template>
-      </el-table-column>
+        :label="t('column.parameter')"
+        prop="params"
+        min-width="150"
+        show-overflow-tooltip />
       <el-table-column
         align="center"
-        :label="t('table.status')"
-        prop="status">
-        <template #default="{row}">
-          <el-tag :type="row.status === 1 ? 'success' : 'danger'">
-            {{ STATUS.getLabel(row.status) }}
-          </el-tag>
-        </template>
-      </el-table-column>
+        :label="t('column.className')"
+        prop="class_name"
+        min-width="200"
+        show-overflow-tooltip />
+      <el-table-column
+        align="center"
+        :label="t('column.duration')"
+        prop="times"
+        width="100"
+        show-overflow-tooltip />
+      <el-table-column
+        align="center"
+        label="IP"
+        prop="ip"
+        width="140"
+        show-overflow-tooltip />
+      <el-table-column
+        align="center"
+        label="User-Agent"
+        prop="agent"
+        min-width="150"
+        show-overflow-tooltip />
       <el-table-column
         align="center"
         :label="t('table.createTime')"
-        prop="created_at" />
-      <el-table-column
-        align="center"
-        :label="t('table.operation')"
-        width="110"
-        fixed="right">
-        <template #default="{ row }">
-          <el-button v-if="!row.author" type="text" @click="statusHandle(row)">
-            {{ t(row.status === 1 ? 'table.disable' : 'table.enable') }}
-          </el-button>
-          <span v-else>-</span>
-        </template>
-      </el-table-column>
+        prop="created_at"
+        width="160" />
     </el-table>
     <g-page :page="page" @change="pageChangeHandle" />
   </div>
@@ -104,26 +121,24 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 
 import usePage from '@/mixins/page'
 import { clearJson, parseDate2Str } from '@/utils'
-import { SEX, STATUS } from '@/utils/dictionary.js'
 
-import { pageApi, statusApi } from '@/api/console/user'
+import { pageApi, truncateApi } from '@/api/console/log'
 
 export default defineComponent({
   setup() {
     const { t } = useI18n()
 
     const refForm = ref()
-    const refAddEdit = ref()
     const { page } = usePage()
     const data = reactive({
       loading: false,
       form: {
         name: '',
+        ip: '',
+        operation: '',
         date: []
       },
-      list: [],
-      SEX,
-      STATUS
+      list: []
     })
 
     /**
@@ -135,6 +150,8 @@ export default defineComponent({
     const getList = () => {
       const params = {
         name: data.form.name,
+        ip: data.form.ip,
+        operation: data.form.operation,
         start: data.form.date && data.form.date.length ? parseDate2Str(data.form.date[0]) : '',
         end: data.form.date && data.form.date.length ? parseDate2Str(data.form.date[1]) : '',
         current: page.current,
@@ -164,22 +181,18 @@ export default defineComponent({
     }
 
     /**
-     * @description: 禁用 / 启用
-     * @param {Object} row
+     * @description: 清除
+     * @param {*}
      * @return {*}
      * @author: gumingchen
      */
-    const statusHandle = row => {
-      ElMessageBox.confirm(t('tip.confirmOperationTip', [row.id, t(`table.${ row.status === 1 ? 'disable' : 'enable' }`)]), t('tip.title'), {
+    const clearHandle = () => {
+      ElMessageBox.confirm(t('tip.confirmTip', [t('button.clear')]), t('tip.title'), {
         confirmButtonText: t('button.confirm'),
         cancelButtonText: t('button.cancel'),
         type: 'warning'
       }).then(() => {
-        const params = {
-          key: row.id,
-          value: row.status === 1 ? 0 : 1
-        }
-        statusApi(params).then(r => {
+        truncateApi().then(r => {
           if (r) {
             ElMessage({
               message: t('tip.success'),
@@ -213,12 +226,11 @@ export default defineComponent({
     return {
       t,
       refForm,
-      refAddEdit,
       page,
       ...toRefs(data),
       getList,
       reacquireHandle,
-      statusHandle,
+      clearHandle,
       pageChangeHandle,
       clearJson
     }

@@ -26,7 +26,8 @@ export default {
     close: 'Close',
     yes: 'Yes',
     no: 'No',
-    comment: 'Comment'
+    comment: 'Comment',
+    clear: 'Clear'
   },
   column: {
     title: 'Column',
@@ -49,7 +50,12 @@ export default {
     commentable: 'Is it possible to comment',
     published: 'Whether to publish',
     watermark: 'Watermark',
-    cover: 'Cover'
+    cover: 'Cover',
+    operation: 'Operation',
+    requestMethod: 'Request method',
+    parameter: 'Parameter',
+    className: 'Class name, method name',
+    duration: 'Duration'
   },
   table: {
     title: 'Table',
@@ -98,7 +104,7 @@ export default {
     comments: 'comments',
     readings: 'readings',
     messages: 'messages',
-    developments: 'Latest developments',
+    dynamic: 'Latest dynamic',
     log: 'Latest log'
   }
 }

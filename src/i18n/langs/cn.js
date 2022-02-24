@@ -26,7 +26,8 @@ export default {
     close: '关闭',
     yes: '是',
     no: '否',
-    comment: '评论'
+    comment: '评论',
+    clear: '清除'
   },
   column: {
     title: '列',
@@ -49,7 +50,12 @@ export default {
     commentable: '是否可评论',
     published: '是否发布',
     watermark: '水印',
-    cover: '封面图'
+    cover: '封面图',
+    operation: '操作',
+    requestMethod: '请求方法',
+    parameter: '参数',
+    className: '类名、方法名',
+    duration: '时长'
   },
   table: {
     title: '表格',
@@ -98,7 +104,7 @@ export default {
     comments: '评论',
     readings: '阅读',
     messages: '留言',
-    developments: '最新动态',
+    dynamic: '最新动态',
     log: '最新日志'
   }
 }

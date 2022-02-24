@@ -76,6 +76,49 @@ export function parseStr2Date(time = '', separator = ['-', ' ', ':']) {
 }
 
 /**
+ * @description: 字符串转日期
+ * @param {string} time 日期字符串
+ * @param {string} format 格式
+ * @returns {string}
+ */
+export function parseTime(time = '', format) {
+  let result = ''
+  const date = parseStr2Date(time)
+  const now = new Date()
+  const difference = (now.getTime() - date.getTime()) / 1000
+
+  if (difference < 30) {
+    result = '刚刚'
+  } else if (difference < 3600) {
+    result = Math.ceil(difference / 60) + '分钟前'
+  } else if (difference < 3600 * 24) {
+    result = Math.ceil(difference / 3600) + '小时前'
+  } else if (difference < 3600 * 24 * 2) {
+    result = '1天前'
+  } else {
+    result = parseDate2Str(time, format)
+  }
+  return result
+}
+
+/**
+ * @description: 获取最近天数的日期 (不包括当天)
+ * @param {*} day 天数
+ * @param {*} format 格式
+ * @return {*}
+ * @author: gumingchen
+ */
+export function getLastDaysDate(day, format = '{y}-{M}-{d}') {
+  const result = []
+  for (let i = day; i > 0; i--) {
+    const times = i * 60 * 60 * 24 * 1000
+    const lastDate = new Date().getTime() - times
+    result.push(parseDate2Str(new Date(lastDate), format))
+  }
+  return result
+}
+
+/**
  * @description: json 转 param
  * @param {*} json
  * @return {*}

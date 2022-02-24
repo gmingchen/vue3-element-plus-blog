@@ -60,7 +60,7 @@ export default {
       const meta = route.meta
       const name = route.name
       const queryStr = JSON.stringify(route.query)
-      const paramsStr = JSON.stringify(route.params)
+      const paramsStr = '{}' // JSON.stringify(route.params)
       const tab = {
         value: `${ name }-${ queryStr }-${ paramsStr }`,
         title_cn: meta.title_cn,
@@ -94,7 +94,7 @@ export default {
     updateTabTitle({ commit }, { route, title }) {
       const name = route.name
       const queryStr = JSON.stringify(route.query)
-      const paramsStr = JSON.stringify(route.params)
+      const paramsStr = '{}' // JSON.stringify(route.params)
       const value = `${ name }-${ queryStr }-${ paramsStr }`
       commit('UPDATE_TAB_TITLE', { value, title })
     }

@@ -94,10 +94,16 @@ const console = {
       meta: { title_cn: '系统管理', title_en: 'System management' },
       children: [
         {
-          path: 'index',
+          path: 'config',
           name: 'systemConfig',
           component: () => import('@/views/console/modules/system/config/index.vue'),
           meta: { title_cn: '配置', title_en: 'Configure' }
+        },
+        {
+          path: 'log',
+          name: 'systemLog',
+          component: () => import('@/views/console/modules/system/log/index.vue'),
+          meta: { title_cn: '日志', title_en: 'Log' }
         }
       ]
     }
