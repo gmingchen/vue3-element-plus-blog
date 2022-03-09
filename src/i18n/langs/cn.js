@@ -103,6 +103,7 @@ export default {
     releases: '发布',
     comments: '评论',
     readings: '阅读',
+    praises: '点赞',
     messages: '留言',
     dynamic: '最新动态',
     log: '最新日志'

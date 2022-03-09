@@ -1,0 +1,1 @@
+import{_ as e}from"./index.8ebc5aa5.js";import{_ as n}from"./index.84770b9f.js";import{g as t,o as r,k as a,q as s}from"./vendor.9347675a.js";/* empty css                         *//* empty css                  */const p=t({components:{Language:e},setup(){return{}}});function c(_,i,m,d,u,f){const o=e;return r(),a("div",null,[s(o)])}var $=n(p,[["render",c]]);export{$ as default};

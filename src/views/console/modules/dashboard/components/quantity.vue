@@ -36,6 +36,16 @@
       <el-card shadow="always">
         <template #header>
           <div class="card-header flex-box flex_j_c-space-between">
+            <span>{{ t('console.number', [t('console.praises')]) }}</span>
+          </div>
+        </template>
+        <span class="quantity">{{ count.praise }}</span>
+      </el-card>
+    </div>
+    <div class="quantity-item margin_b-20 padding-n-10 flex-item_f-1">
+      <el-card shadow="always">
+        <template #header>
+          <div class="card-header flex-box flex_j_c-space-between">
             <span>{{ t('console.number', [t('console.readings')]) }}</span>
           </div>
         </template>
@@ -74,6 +84,7 @@ export default defineComponent({
         article: 0,
         release: 0,
         comment: 0,
+        praise: 0,
         read: 0,
         message: 0
       }
@@ -134,7 +145,6 @@ export default defineComponent({
 .quantity-box {
   .quantity-item {
     min-width: 200px;
-    max-width: 20%;
     cursor: pointer;
     .quantity {
       font-size: 30px;

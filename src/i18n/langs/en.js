@@ -103,6 +103,7 @@ export default {
     releases: 'releases',
     comments: 'comments',
     readings: 'readings',
+    praises: 'praises',
     messages: 'messages',
     dynamic: 'Latest dynamic',
     log: 'Latest log'

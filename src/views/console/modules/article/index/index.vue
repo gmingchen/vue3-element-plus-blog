@@ -56,6 +56,62 @@
       border
       :data="list"
       @selection-change="selectionHandle">
+      <el-table-column type="expand">
+        <template #default="{ row }">
+          <el-row class="margin-10">
+            <el-col :span="7" class="flex-box">
+              <div class="width-160">{{ t('column.cover') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">
+                <el-image style="width: 55px; height: 55px" :src="row.cover" :preview-src-list="[row.cover]" />
+              </div>
+            </el-col>
+            <el-col :span="7">
+              <div class="flex-box">
+                <div class="width-160">{{ t('console.number', [t('console.praises')]) }}：</div>
+                <div class="flex-item_f-1 ellipse-1">{{ row.praise }}</div>
+              </div>
+              <div class="flex-box margin_t-10">
+                <div class="width-160">{{ t('console.number', [t('console.readings')]) }}：</div>
+                <div class="flex-item_f-1 ellipse-1">{{ row.read }}</div>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="margin-10">
+            <el-col :span="7" class="flex-box">
+              <div class="width-160">{{ t('table.headline') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">{{ row.title }}</div>
+            </el-col>
+            <el-col :span="17" class="flex-box">
+              <div class="width-160">{{ t('column.describe') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">{{ row.describe }}</div>
+            </el-col>
+          </el-row>
+          <el-row class="margin-10">
+            <el-col :span="7" class="flex-box">
+              <div class="width-160">{{ t('column.category') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">{{ row.category_name }}</div>
+            </el-col>
+            <el-col :span="17" class="flex-box">
+              <div class="width-160">{{ t('column.tag') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">
+                <el-tag v-for="item in row.tags" :key="item.id" class="margin_r-5">
+                  {{ item.name }}
+                </el-tag>
+              </div>
+            </el-col>
+          </el-row>
+          <el-row class="margin-10">
+            <el-col :span="7" class="flex-box">
+              <div class="width-160">{{ t('table.createTime') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">{{ row.created_at }}</div>
+            </el-col>
+            <el-col :span="7" class="flex-box">
+              <div class="width-160">{{ t('table.updateTime') }}：</div>
+              <div class="flex-item_f-1 ellipse-1">{{ row.updated_at || '-' }}</div>
+            </el-col>
+          </el-row>
+        </template>
+      </el-table-column>
       <el-table-column align="center" type="selection" width="50" />
       <el-table-column
         align="center"
@@ -69,35 +125,14 @@
         width="150" />
       <el-table-column
         align="center"
-        :label="t('column.cover')"
-        prop="cover">
-        <template #default="{ row }">
-          <el-image :src="row.cover" :preview-src-list="[row.cover]" />
-        </template>
-      </el-table-column>
-      <el-table-column
-        align="center"
         :label="t('column.describe')"
         prop="describe"
-        width="350"
         show-overflow-tooltip />
       <el-table-column
         align="center"
         :label="t('column.category')"
         prop="category_name"
         width="150" />
-      <el-table-column
-        align="center"
-        :label="t('column.tag')"
-        prop="tags"
-        width="300"
-        show-overflow-tooltip>
-        <template #default="{ row }">
-          <el-tag v-for="item in row.tags" :key="item.id" class="margin_r-5">
-            {{ item.name }}
-          </el-tag>
-        </template>
-      </el-table-column>
       <el-table-column
         align="center"
         :label="t('column.recommended')"
@@ -141,11 +176,6 @@
         align="center"
         :label="t('table.createTime')"
         prop="created_at"
-        width="160" />
-      <el-table-column
-        align="center"
-        :label="t('table.updateTime')"
-        prop="updated_at"
         width="160" />
       <el-table-column
         align="center"
@@ -410,3 +440,10 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.table-detail {
+  &-box {}
+  &-label {}
+}
+</style>
