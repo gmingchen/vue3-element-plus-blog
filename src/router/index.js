@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 import store from '@/store'
 
 /* 主入口 */
@@ -17,6 +18,15 @@ const client = {
       meta: {
         title_cn: '首页',
         title_en: 'Home'
+      }
+    },
+    {
+      path: '/',
+      name: 'blog',
+      component: () => import('@/views/client/modules/blog/index.vue'),
+      meta: {
+        title_cn: '博客',
+        title_en: 'Blog'
       }
     }
   ],
@@ -119,7 +129,7 @@ const console = {
 
 /* 通用 */
 const global = [
-  { path: '/', redirect: { name: 'home' }, meta: { title_cn: '重定向', title_en: 'Redirect' } },
+  { path: '/', redirect: { name: 'blog' }, meta: { title_cn: '重定向', title_en: 'Redirect' } },
   { path: '/401', name: '401', component: () => import('@/views/global/401.vue'), meta: { title_cn: '401', title_en: '401' } },
   { path: '/404', name: '404', component: () => import('@/views/global/404.vue'), meta: { title_cn: '404', title_en: '404' } },
   { path: '/500', name: '500', component: () => import('@/views/global/500.vue'), meta: { title_cn: '500', title_en: '500' } }

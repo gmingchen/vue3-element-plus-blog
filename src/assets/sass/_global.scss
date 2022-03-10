@@ -125,7 +125,7 @@ ul {
 // todo: flex 布局
 $directions: row, row-reverse,  column, column-reverse;
 $wraps: nowrap, wrap, wrap-reverse;
-$justifyContents: flex-start, flex-end, center, space-between, space-around;
+$justifyContents: flex-start, flex-end, center, space-between, space-around, space-evenly;
 $alignItems: flex-start, flex-end, center, baseline, stretch;
 $alignContents: flex-start, flex-end, center, space-between, space-around, stretch;
 

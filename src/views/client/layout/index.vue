@@ -1,8 +1,8 @@
 <template>
   <el-container class="client-layout height-full width-full">
     <Headbar />
-    <el-scrollbar>
-      <View class="margin_t-60" />
+    <el-scrollbar class="width-full">
+      <View class="margin_t-90" />
     </el-scrollbar>
   </el-container>
 </template>
