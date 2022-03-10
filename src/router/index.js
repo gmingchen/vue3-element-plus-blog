@@ -19,7 +19,14 @@ const client = {
         title_en: 'Home'
       }
     }
-  ]
+  ],
+  beforeEnter(_to, _from, next) {
+    const token = store.getters['user/tokenVal']
+    if (token && /\S/u.test(token)) {
+      store.dispatch('user/getUser')
+    }
+    next()
+  }
 }
 
 const console = {
@@ -112,7 +119,7 @@ const console = {
 
 /* 通用 */
 const global = [
-  { path: '/', redirect: { name: 'articleTag' }, meta: { title_cn: '重定向', title_en: 'Redirect' } },
+  { path: '/', redirect: { name: 'home' }, meta: { title_cn: '重定向', title_en: 'Redirect' } },
   { path: '/401', name: '401', component: () => import('@/views/global/401.vue'), meta: { title_cn: '401', title_en: '401' } },
   { path: '/404', name: '404', component: () => import('@/views/global/404.vue'), meta: { title_cn: '404', title_en: '404' } },
   { path: '/500', name: '500', component: () => import('@/views/global/500.vue'), meta: { title_cn: '500', title_en: '500' } }

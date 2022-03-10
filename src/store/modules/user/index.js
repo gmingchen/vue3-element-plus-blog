@@ -6,7 +6,10 @@
  * @LastEditors: gumingchen
  * @LastEditTime: 2021-04-18 09:16:20
  */
-import { getToken, setToken } from '@/utils/storage'
+import { getToken, setToken, clearToken } from '@/utils/storage'
+import { loginApi } from '@/api/client/login'
+import { infoApi } from '@/api/client/user'
+import { clearJson } from '@/utils/index'
 
 export default {
   state: {
@@ -17,6 +20,8 @@ export default {
       mobile: '',
       email: '',
       avatar: '',
+      author: 0,
+      sex: '',
       status: '',
       roles: []
     },
@@ -35,10 +40,10 @@ export default {
       state.token = token
     },
     CLEAR_USER: state => {
-      //
+      clearJson(state.user)
     },
     CLEAR_TOKEN: state => {
-      //
+      state.token = ''
     }
   },
   actions: {
@@ -49,7 +54,12 @@ export default {
      * @returns
      */
     async login({ commit }, params) {
-      //
+      const r = await loginApi(params)
+      if (r) {
+        setToken(r.data)
+        commit('SET_TOKEN', r.data)
+      }
+      return r
     },
 
     /**
@@ -57,7 +67,11 @@ export default {
      * @returns
      */
     async getUser({ commit }) {
-      //
+      const r = await infoApi()
+      if (r) {
+        commit('SET_USER', r.data)
+      }
+      return r
     },
 
     /**
@@ -72,8 +86,10 @@ export default {
      * 退出当前账户
      * @returns
      */
-    async logout() {
-      //
+    logout({ commit }) {
+      clearToken()
+      commit('CLEAR_USER')
+      commit('CLEAR_TOKEN')
     },
 
     /**

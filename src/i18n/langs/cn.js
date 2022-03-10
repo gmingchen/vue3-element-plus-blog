@@ -27,15 +27,18 @@ export default {
     yes: '是',
     no: '否',
     comment: '评论',
-    clear: '清除'
+    clear: '清除',
+    exit: '退出'
   },
   column: {
     title: '列',
     name: '名称',
     username: '用户名',
+    password: '密码',
     nickname: '昵称',
     avatar: '头像',
     mobile: '手机号',
+    email: '邮箱',
     sex: '性别',
     category: '分类',
     content: '内容',
@@ -107,5 +110,9 @@ export default {
     messages: '留言',
     dynamic: '最新动态',
     log: '最新日志'
+  },
+  client: {
+    login: '登录',
+    join: '加入'
   }
 }

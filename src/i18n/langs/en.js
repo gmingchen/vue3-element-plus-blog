@@ -27,15 +27,18 @@ export default {
     yes: 'Yes',
     no: 'No',
     comment: 'Comment',
-    clear: 'Clear'
+    clear: 'Clear',
+    exit: 'Exit'
   },
   column: {
     title: 'Column',
     name: 'Name',
     username: 'Username',
+    password: 'Password',
     nickname: 'Nickname',
     avatar: 'Avatar',
     mobile: 'Phone number',
+    email: 'Mailbox',
     sex: 'Sex',
     category: 'Category',
     content: 'Content',
@@ -107,5 +110,9 @@ export default {
     messages: 'messages',
     dynamic: 'Latest dynamic',
     log: 'Latest log'
+  },
+  client: {
+    login: 'Sign in',
+    join: 'Join'
   }
 }

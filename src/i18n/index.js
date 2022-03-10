@@ -1,6 +1,6 @@
 import { createI18n } from 'vue-i18n'
-import store from '@/store'
 const importModules = import.meta.globEager('./langs/*.js')
+import { getLanguage } from '@/utils/storage'
 
 const messages = {}
 
@@ -11,7 +11,7 @@ for (const key in importModules) {
 }
 
 const i18n = createI18n({
-  locale: store.getters['setting/language'], // 初始语言设置
+  locale: getLanguage() || 'cn', // 初始语言设置
   fallbackLocale: 'cn',
   messages
 })

@@ -24,6 +24,7 @@
 import { computed, defineComponent, nextTick, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
 import { ElMessage } from 'element-plus'
 import Language from '@/components/language/index.vue'
@@ -36,6 +37,7 @@ export default defineComponent({
   setup() {
     const { t } = useI18n()
     const store = useStore()
+    const router = useRouter()
 
     const refThemeDrawer = ref()
 
@@ -90,13 +92,14 @@ export default defineComponent({
      * @author: gumingchen
      */
     const commandHandle = (command) => {
-      console.log(command)
       switch (command) {
         case 'blog':
           break
         case 'exit':
+          store.dispatch('user/logout')
           break
       }
+      router.push({ name: 'home' })
     }
 
     return {
