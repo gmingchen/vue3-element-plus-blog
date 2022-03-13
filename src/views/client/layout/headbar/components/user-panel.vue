@@ -5,7 +5,7 @@
         <el-image class="avatar" :src="user.avatar" />
       </div>
       <div class="flex-item_f-3">
-        <p class="name margin-10-n">{{ user.nickname || user.username }}</p>
+        <p class="name margin-10-n font-size-18">{{ user.nickname || user.username }}</p>
         <div class="flex-box">
           <div class="flex-item_f-2">
             <div class="info-box">
@@ -92,7 +92,6 @@ export default defineComponent({
   border-radius: 50%;
 }
 .name {
-  font-size: 18px;
   color: var(--el-color-primary);
 }
 .info-box {

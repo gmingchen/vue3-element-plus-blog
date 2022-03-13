@@ -1,8 +1,8 @@
 <template>
   <div class="console-actionbar">
-    <g-icon name="refresh" @click="refreshHandle" />
-    <g-icon :name="screen ? 'collapse' : 'expand'" @click="screenfullHandle" />
-    <g-icon name="set" @click="themeHandle" />
+    <g-icon class="padding_r-10" name="refresh" @click="refreshHandle" />
+    <g-icon class="padding_r-10" :name="screen ? 'collapse' : 'expand'" @click="screenfullHandle" />
+    <g-icon class="padding_r-10" name="set" @click="themeHandle" />
     <Language />
     <el-dropdown trigger="click" @command="commandHandle">
       <img

@@ -8,7 +8,7 @@
             <el-button class="button" type="text" @click="buttonHandle(1)">{{ t('button.add') }}</el-button>
           </div>
         </template>
-        <span class="quantity">{{ count.article }}</span>
+        <span class="quantity font-size-30">{{ count.article }}</span>
       </el-card>
     </div>
     <div class="quantity-item margin_b-20 padding-n-10 flex-item_f-1">
@@ -147,7 +147,6 @@ export default defineComponent({
     min-width: 200px;
     cursor: pointer;
     .quantity {
-      font-size: 30px;
       font-weight: 600;
     }
   }

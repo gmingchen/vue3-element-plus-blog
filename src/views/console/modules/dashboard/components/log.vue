@@ -11,7 +11,7 @@
         <div class="info ellipse-1">{{ item.username || item.nickname || '-' }}</div>
         <div class="info ellipse-1">{{ item.operation }}</div>
         <div class="info ellipse-1">{{ item.ip }}</div>
-        <div class="date">{{ parseTime(item.created_at) }}</div>
+        <div class="date font-size-12">{{ parseTime(item.created_at) }}</div>
       </li>
     </ul>
     <el-empty v-else />
@@ -90,7 +90,6 @@ export default defineComponent({
       }
       .date {
         width: 120px;
-        font-size: 12px;
         text-align: right;
         color: var(--el-text-color-placeholder);
       }

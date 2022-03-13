@@ -1,13 +1,13 @@
 <template>
   <el-sub-menu v-if="data.children && data.children.length > 0" :index="data.value + ''">
     <template #title>
-      <g-icon :name="data.icon" />
+      <g-icon :name="data.icon" class="padding_r-5" />
       <span>{{ data[`label_${language}`] }}</span>
     </template>
     <sub-item v-for="item in data.children" :key="item.value" :data="item" />
   </el-sub-menu>
   <el-menu-item v-else :index="data.value + ''" @click="clickHandle(data.value)">
-    <g-icon :name="data.icon" />
+    <g-icon :name="data.icon" class="padding_r-5" />
     <template #title>
       <span>{{ data[`label_${language}`] }}</span>
     </template>

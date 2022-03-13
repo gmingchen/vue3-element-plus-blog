@@ -4,7 +4,7 @@
       <div class="content-box margin-0-a flex-box flex_j_c-space-between flex_w-wrap height-full">
         <div class="logo-box flex-item_f-1 height-full flex-box">
           <el-image class="logo" src="http://oss.blog.gumingchen.icu/image/logo.png" />
-          <span>Slipper</span>
+          <span class="font-size-24">Slipper</span>
         </div>
         <Menu class="menu-box flex-item_f-1" />
         <div class="icon-box flex-box flex_a_i-center cursor-pointer">
@@ -27,6 +27,7 @@
           <g-icon
             class="menu-icon"
             :class="{'menu-icon-open' : drawerVisible}"
+            :style="{ display: drawerVisible ? 'inline' : '' }"
             name="menu"
             size="26px"
             @click="drawerHandle" />
@@ -110,7 +111,6 @@ $height: 60px;
         line-height: $height;
         span {
           font-family: 'AppleChancery';
-          font-size: 24px;
         }
       }
       .icon-box {
@@ -135,24 +135,12 @@ $height: 60px;
   }
 }
 
-// 逆时针选择 450
-@keyframes rotateAgainst450 {
-  0% {
-    transform: rotate(450deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-}
-
 .menu-icon {
   display: none;
   color: var(--el-color-primary);
-  animation: rotateAgainst450 0.4s ease-out 0s;
-  animation-fill-mode: forwards;
+  transition: all 0.8s;
   &-open {
-    animation: rotateAlong450 0.4s ease-out 0s;
-    animation-fill-mode: forwards;
+    transform: rotate(450deg);
   }
 }
 </style>

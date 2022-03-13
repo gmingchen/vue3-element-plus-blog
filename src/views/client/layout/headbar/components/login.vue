@@ -15,7 +15,7 @@
     @closed="dialogClosedHandle">
     <div class="logo-box flex-box flex_j_c-center flex_a_i-center margin_b-10">
       <el-image class="logo" src="http://oss.blog.gumingchen.icu/image/logo.png" />
-      <span>Slipper</span>
+      <span class="font-size-24">Slipper</span>
     </div>
     <el-form
       ref="refForm"
@@ -141,10 +141,6 @@ export default defineComponent({
   }
   span {
     font-family: 'AppleChancery';
-    font-size: 24px;
   }
-}
-::v-deep(.el-input__prefix) {
-  left: 8px;
 }
 </style>
