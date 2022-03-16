@@ -34,14 +34,19 @@ export default defineComponent({
     flex-direction: column;
   }
 }
+@media screen and (max-width: 400px) {
+  .blog-left, .blog-right {
+    padding: 0;
+  }
+}
 
 .blog-container {
   max-width: 1200px;;
   .blog-left {
-    min-width: 400px;
+    min-width: 350px;
   }
   .blog-right {
-    min-width: 400px;
+    min-width: 350px;
   }
 }
 </style>

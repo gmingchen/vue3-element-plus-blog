@@ -3,8 +3,8 @@
     <div class="content-wrap height-full">
       <div class="content-box margin-0-a flex-box flex_j_c-space-between flex_w-wrap height-full">
         <div class="logo-box flex-item_f-1 height-full flex-box">
-          <el-image class="logo" src="http://oss.blog.gumingchen.icu/image/logo.png" />
-          <span class="font-size-24">Slipper</span>
+          <el-image class="logo" :src="settings.logo" />
+          <span class="font-size-24">{{ settings.title }}</span>
         </div>
         <Menu class="menu-box flex-item_f-1" />
         <div class="icon-box flex-box flex_a_i-center cursor-pointer">
@@ -54,6 +54,7 @@ export default defineComponent({
     const store = useStore()
 
     const user = computed(() => store.state.user.user)
+    const settings = computed(() => store.state.client.settings)
 
     const refLogin = ref()
     const data = reactive({
@@ -74,6 +75,7 @@ export default defineComponent({
 
     return {
       user,
+      settings,
       refLogin,
       ...toRefs(data),
       loginHandle,

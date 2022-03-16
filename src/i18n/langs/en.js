@@ -58,7 +58,20 @@ export default {
     requestMethod: 'Request method',
     parameter: 'Parameter',
     className: 'Class name, method name',
-    duration: 'Duration'
+    duration: 'Duration',
+    signature: 'Signature',
+    address: 'Address',
+    qq: 'QQ',
+    wechat: 'Wechat',
+    github: 'Github',
+    officialAccount: 'Official account',
+    wechatGroup: 'wechat group',
+    qqGroup: 'QQ group',
+    logo: 'Logo',
+    recordNumber: 'Record number',
+    recordNumberLink: 'Record number link',
+    websiteLink: 'Website link',
+    websiteDescribe: 'Website description'
   },
   table: {
     title: 'Table',
@@ -109,7 +122,9 @@ export default {
     praises: 'praises',
     messages: 'messages',
     dynamic: 'Latest dynamic',
-    log: 'Latest log'
+    log: 'Latest log',
+    businessCard: 'Business card',
+    siteInformation: 'Site information'
   },
   client: {
     login: 'Sign in',

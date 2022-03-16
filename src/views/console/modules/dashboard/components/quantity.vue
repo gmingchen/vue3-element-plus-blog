@@ -19,7 +19,7 @@
             <el-button class="button" type="text" @click="buttonHandle(2)">{{ t('button.view') }}</el-button>
           </div>
         </template>
-        <span class="quantity">{{ count.release }}</span>
+        <span class="quantity font-size-30">{{ count.release }}</span>
       </el-card>
     </div>
     <div class="quantity-item margin_b-20 padding-n-10 flex-item_f-1">
@@ -29,7 +29,7 @@
             <span>{{ t('console.number', [t('console.comments')]) }}</span>
           </div>
         </template>
-        <span class="quantity">{{ count.comment }}</span>
+        <span class="quantity font-size-30">{{ count.comment }}</span>
       </el-card>
     </div>
     <div class="quantity-item margin_b-20 padding-n-10 flex-item_f-1">
@@ -39,7 +39,7 @@
             <span>{{ t('console.number', [t('console.praises')]) }}</span>
           </div>
         </template>
-        <span class="quantity">{{ count.praise }}</span>
+        <span class="quantity font-size-30">{{ count.praise }}</span>
       </el-card>
     </div>
     <div class="quantity-item margin_b-20 padding-n-10 flex-item_f-1">
@@ -49,7 +49,7 @@
             <span>{{ t('console.number', [t('console.readings')]) }}</span>
           </div>
         </template>
-        <span class="quantity">{{ count.read }}</span>
+        <span class="quantity font-size-30">{{ count.read }}</span>
       </el-card>
     </div>
     <div class="quantity-item margin_b-20 padding-n-10 flex-item_f-1">
@@ -60,7 +60,7 @@
             <el-button class="button" type="text" @click="buttonHandle(3)">{{ t('button.view') }}</el-button>
           </div>
         </template>
-        <span class="quantity">{{ count.message }}</span>
+        <span class="quantity font-size-30">{{ count.message }}</span>
       </el-card>
     </div>
   </div>

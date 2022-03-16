@@ -8,7 +8,7 @@
       label-position="top"
       @keyup.enter="submit()">
       <el-row :gutter="20">
-        <el-col :span="6">
+        <el-col :span="6" class="min-width">
           <el-form-item :label="t('table.headline')" prop="title">
             <el-input
               v-model="form.title"
@@ -78,9 +78,9 @@
             </el-radio-group>
           </el-form-item>
         </el-col>
-        <el-col :span="7">
+        <el-col :span="7" class="min-width">
           <el-form-item :label="t('column.cover')" prop="image">
-            <div>
+            <div class="width-full">
               <!-- {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="coverWatermark" /> -->
               <Upload v-model:url="form.cover" :watermark="coverWatermark" />
             </div>
@@ -326,3 +326,9 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.min-width {
+  min-width: 300px;
+}
+</style>

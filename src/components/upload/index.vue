@@ -1,22 +1,25 @@
 <template>
-  <el-upload
-    class="uploader"
-    :action="action"
-    :headers="{
-      [tokenKey]: token
-    }"
-    :data="{ watermark: watermark }"
-    :show-file-list="false"
-    :before-upload="beforeHandle"
-    :on-success="successHandle"
-    accept="image/*">
-    <img v-if="thisUrl" :src="thisUrl" class="avatar">
-    <GSvg v-else name="plus" />
-  </el-upload>
+  <div class="width-full">
+    <el-upload
+      class="uploader"
+      :action="action"
+      :headers="{
+        [tokenKey]: token
+      }"
+      :data="{ watermark: watermark }"
+      :show-file-list="false"
+      :before-upload="beforeHandle"
+      :on-success="successHandle"
+      accept="image/*">
+      <img v-if="thisUrl" :src="thisUrl" class="avatar">
+      <GSvg v-else name="plus" />
+    </el-upload>
+    <el-input v-model="inputUrl" @blur="blurHandle" />
+  </div>
 </template>
 
 <script >
-import { defineComponent, reactive, toRefs } from 'vue'
+import { defineComponent, reactive, toRefs, watch } from 'vue'
 import { useStore } from 'vuex'
 
 import { ElMessage } from 'element-plus'
@@ -39,14 +42,18 @@ export default defineComponent({
   emits: ['update:url', 'update:watermark'],
   setup(props) {
     const store = useStore()
-
     const data = reactive({
       action: upload(),
       tokenKey: TOKEN_KEY,
-      token: store.state.user.token
+      token: store.state.user.token,
+      inputUrl: ''
     })
 
     const thisUrl = useModel(props, 'url')
+
+    watch(thisUrl, (newVal, _oldVal) => {
+      data.inputUrl = newVal
+    })
 
     const beforeHandle = () => {
       //
@@ -54,6 +61,7 @@ export default defineComponent({
     const successHandle = (r) => {
       if (SUCCESS_CODE.includes(r.code)) {
         thisUrl.value = r.data.url
+        data.inputUrl = r.data.url
       } else {
         ElMessage({
           message: r.message,
@@ -62,11 +70,20 @@ export default defineComponent({
       }
     }
 
+    const blurHandle = () => {
+      if (data.inputUrl) {
+        thisUrl.value = data.inputUrl
+      } else {
+        thisUrl.value = ''
+      }
+    }
+
     return {
       ...toRefs(data),
       thisUrl,
       beforeHandle,
-      successHandle
+      successHandle,
+      blurHandle
     }
   }
 })

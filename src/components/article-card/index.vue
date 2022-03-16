@@ -5,7 +5,7 @@
         class="image margin_r-20"
         fit="contain"
         src="http://oss.blog.gumingchen.icu/image/qq.png" />
-      <div class="flex-item_f-1">
+      <div class="detail-box flex-item_f-1">
         <div class="title-box flex-box flex_a_i-center flex_w-wrap">
           <div class="category margin_r-5 padding-5 font-size-14">Vue</div>
           <div class="title font-size-20">JavaScript中的事件循环</div>
@@ -48,6 +48,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 461px) {
+  .detail-box {
+    margin-top: 10px;
+  }
+}
 .article-card {
   cursor: pointer;
   &:hover {
@@ -66,25 +71,28 @@ export default defineComponent({
       transition: all .6s;
     }
   }
-  .title-box {
-    .category {
-      color: white;
-      font-weight: 600;
-      border-radius: 5px;
-      background-color: var(--el-color-primary);
+  .detail-box {
+    min-width: 160px;
+    .title-box {
+      .category {
+        color: white;
+        font-weight: 600;
+        border-radius: 5px;
+        background-color: var(--el-color-primary);
+      }
+      .title {
+        font-weight: 600;
+      }
     }
-    .title {
-      font-weight: 600;
+    .describe {
+      line-height: 20px;
+      color: var(--el-color-info);
     }
-  }
-  .describe {
-    line-height: 20px;
-    color: var(--el-color-info);
-  }
-  .other-box {
-    font-size: 14px;
-    line-height: 25px;
-    color: var(--el-color-info);
+    .other-box {
+      font-size: 14px;
+      line-height: 25px;
+      color: var(--el-color-info);
+    }
   }
 }
 </style>

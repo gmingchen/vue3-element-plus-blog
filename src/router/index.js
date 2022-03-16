@@ -32,6 +32,7 @@ const client = {
   ],
   beforeEnter(_to, _from, next) {
     const token = store.getters['user/tokenVal']
+    store.dispatch('client/getSettings')
     if (token && /\S/u.test(token)) {
       store.dispatch('user/getUser')
     }
@@ -110,6 +111,12 @@ const console = {
       component: () => import('@/components/view/index.vue'),
       meta: { title_cn: '系统管理', title_en: 'System management' },
       children: [
+        {
+          path: 'settings',
+          name: 'systemSettings',
+          component: () => import('@/views/console/modules/system/settings/index.vue'),
+          meta: { title_cn: '设置', title_en: 'Settings' }
+        },
         {
           path: 'config',
           name: 'systemConfig',

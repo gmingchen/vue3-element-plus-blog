@@ -1,18 +1,18 @@
 <template>
-  <div class="bussiness-card-container">
+  <div v-loading="loading" class="bussiness-card-container">
     <div class="box margin_t-35 margin_b-10 padding_t-50 padding_b-10">
-      <el-image class="avatar height-70 width-70 padding-5" src="http://oss.blog.gumingchen.icu/image/slipper.jpeg" />
-      <div class="name text-align-center">拖孩</div>
-      <div class="personal-signature margin_t-10 text-align-center font-size-12">本是同根生，相煎何太急</div>
-      <div class="job margin_t-10 text-align-center font-size-14">前端开发工程师、Java开发工程师</div>
-      <div class="address margin_t-10 text-align-center font-size-14">江苏省-苏州市</div>
+      <el-image class="avatar height-70 width-70 padding-5" :src="settings.avatar" />
+      <div class="name text-align-center">{{ settings.name }}</div>
+      <div class="personal-signature margin_t-10 text-align-center font-size-12">{{ settings.signature }}</div>
+      <div class="job margin_t-10 text-align-center font-size-14">{{ settings.job }}</div>
+      <div class="address margin_t-10 text-align-center font-size-14">{{ settings.address }}</div>
       <div class="contact-box margin_t-10 flex-box">
         <div class="flex-item_f-1 text-align-center">
           <el-popover placement="bottom" :width="200" trigger="click">
             <template #reference>
               <el-image class="height-40 width-40" src="http://oss.blog.gumingchen.icu/image/qq.png" />
             </template>
-            <el-image class="width-full" src="http://oss.blog.gumingchen.icu/image/qq.png" />
+            <el-image class="width-full" :src="settings.qq" />
           </el-popover>
         </div>
         <div class="flex-item_f-1 text-align-center">
@@ -20,7 +20,7 @@
             <template #reference>
               <el-image class="height-40 width-40" src="http://oss.blog.gumingchen.icu/image/wechat.png" />
             </template>
-            <el-image class="width-full" src="http://oss.blog.gumingchen.icu/image/wechat.png" />
+            <el-image class="width-full" :src="settings.wechat" />
           </el-popover>
         </div>
         <div class="flex-item_f-1 text-align-center">
@@ -32,14 +32,23 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, reactive, toRefs, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
   setup() {
+    const store = useStore()
+
+    const loading = computed(() => store.state.client.loading)
+    const settings = computed(() => store.state.client.settings)
+
     const githubHandle = () => {
-      window.open('https://www.baidu.com')
+      window.open(settings.value.github)
     }
+
     return {
+      loading,
+      settings,
       githubHandle
     }
   }

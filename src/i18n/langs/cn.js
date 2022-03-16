@@ -58,7 +58,20 @@ export default {
     requestMethod: '请求方法',
     parameter: '参数',
     className: '类名、方法名',
-    duration: '时长'
+    duration: '时长',
+    signature: '签名',
+    address: '地址',
+    qq: 'QQ',
+    wechat: '微信',
+    github: 'Github',
+    officialAccount: '公众号',
+    wechatGroup: '微信群',
+    qqGroup: 'QQ群',
+    logo: 'Logo',
+    recordNumber: '备案号',
+    recordNumberLink: '备案号链接',
+    websiteLink: '网站链接',
+    websiteDescribe: '网站描述'
   },
   table: {
     title: '表格',
@@ -109,7 +122,9 @@ export default {
     praises: '点赞',
     messages: '留言',
     dynamic: '最新动态',
-    log: '最新日志'
+    log: '最新日志',
+    businessCard: '个人名片',
+    siteInformation: '站点信息'
   },
   client: {
     login: '登录',

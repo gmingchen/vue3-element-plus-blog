@@ -28,7 +28,7 @@
           show-word-limit />
       </el-form-item>
       <el-form-item :label="t('table.image')" prop="image">
-        <div>
+        <div class="width-full">
           <!-- {{ t('column.watermark') }}&nbsp;-&nbsp;<el-switch v-model="watermark" /> -->
           <Upload v-model:url="form.image" :watermark="watermark" />
         </div>

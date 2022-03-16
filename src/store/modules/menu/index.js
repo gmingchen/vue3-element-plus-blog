@@ -24,6 +24,7 @@ export default {
         label_en: 'System management',
         icon: 'system',
         children: [
+          { value: 'systemSettings', label_cn: '设置', label_en: 'Settings', icon: 'system-settings' },
           { value: 'systemConfig', label_cn: '配置', label_en: 'Configure', icon: 'config' },
           { value: 'systemLog', label_cn: '日志', label_en: 'Log', icon: 'log' }
         ]

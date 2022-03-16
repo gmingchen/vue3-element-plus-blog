@@ -3,6 +3,7 @@
     <Headbar />
     <el-scrollbar class="width-full">
       <View class="margin_t-90" />
+      <Footer class="margin_t-20" />
     </el-scrollbar>
   </el-container>
 </template>
@@ -12,9 +13,10 @@ import { defineComponent, onBeforeMount } from 'vue'
 
 import Headbar from './headbar/index.vue'
 import View from '@/components/view/index.vue'
+import Footer from './footer/index.vue'
 
 export default defineComponent({
-  components: { Headbar, View },
+  components: { Headbar, View, Footer },
   setup() {
     const snow = () => {
       // 1、定义一片雪花模板
@@ -80,6 +82,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .client-layout {
-  background-color: #f2f2f2;
+  background-color: var(--el-text-color-secondar);
 }
 </style>
