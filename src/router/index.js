@@ -30,11 +30,13 @@ const client = {
       }
     }
   ],
-  beforeEnter(_to, _from, next) {
+  async beforeEnter(_to, _from, next) {
     const token = store.getters['user/tokenVal']
-    store.dispatch('client/getSettings')
+    await store.dispatch('client/getSettings')
+    await store.dispatch('article/getRecommended')
+    await store.dispatch('article/getRead')
     if (token && /\S/u.test(token)) {
-      store.dispatch('user/getUser')
+      await store.dispatch('user/getUser')
     }
     next()
   }

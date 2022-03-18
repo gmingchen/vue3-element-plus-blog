@@ -128,6 +128,14 @@ export default {
   },
   client: {
     login: '登录',
-    join: '加入'
+    join: '加入',
+    copyright: '版权所有',
+    latestArticle: '最新文章',
+    recommendArticle: '推荐文章',
+    popularArticle: '人气文章',
+    more: '更多',
+    contactMe: '您可以通过以下方式联系我',
+    contactDirection: '建议、投诉、合作推荐此方式',
+    sendTo: '发送邮件到'
   }
 }

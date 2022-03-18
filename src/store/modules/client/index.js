@@ -18,7 +18,8 @@ const defaultSettings = {
   record_number: '',
   record_number_link: '',
   link: '',
-  describe: ''
+  describe: '',
+  email: ''
 }
 
 export default {

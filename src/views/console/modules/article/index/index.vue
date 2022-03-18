@@ -71,6 +71,10 @@
                 <div class="flex-item_f-1 ellipse-1">{{ row.praise }}</div>
               </div>
               <div class="flex-box margin_t-10">
+                <div class="width-160">{{ t('console.number', [t('console.comments')]) }}：</div>
+                <div class="flex-item_f-1 ellipse-1">{{ row.comment }}</div>
+              </div>
+              <div class="flex-box margin_t-10">
                 <div class="width-160">{{ t('console.number', [t('console.readings')]) }}：</div>
                 <div class="flex-item_f-1 ellipse-1">{{ row.read }}</div>
               </div>

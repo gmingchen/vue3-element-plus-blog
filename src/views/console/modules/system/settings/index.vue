@@ -35,12 +35,10 @@
           </el-form-item>
         </el-col>
         <el-col :span="6" class="min-width">
-          <el-form-item :label="t('column.signature')" prop="signature">
+          <el-form-item :label="t('column.email')" prop="email">
             <el-input
-              v-model="form.signature"
-              :placeholder="t('column.signature')"
-              rows="4"
-              type="textarea"
+              v-model="form.email"
+              :placeholder="t('column.email')"
               maxlength="100"
               show-word-limit />
           </el-form-item>
@@ -60,6 +58,17 @@
         <el-col :span="6" class="min-width">
           <el-form-item :label="t('column.wechat')" prop="wechat">
             <Upload v-model:url="form.wechat" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6" class="min-width">
+          <el-form-item :label="t('column.signature')" prop="signature">
+            <el-input
+              v-model="form.signature"
+              :placeholder="t('column.signature')"
+              rows="4"
+              type="textarea"
+              maxlength="100"
+              show-word-limit />
           </el-form-item>
         </el-col>
       </el-row>
@@ -174,7 +183,8 @@ export default defineComponent({
         record_number: '',
         record_number_link: '',
         link: '',
-        describe: ''
+        describe: '',
+        email: ''
       }
     })
     const rules = computed(() => {
@@ -191,7 +201,8 @@ export default defineComponent({
         record_number: [{ required: true, message: t('rule.notBlank', [t('column.recordNumber')]), trigger: 'blur' }],
         record_number_link: [{ required: true, message: t('rule.notBlank', [t('column.recordNumberLink')]), trigger: 'blur' }],
         link: [{ required: true, message: t('rule.notBlank', [t('column.websiteLink')]), trigger: 'blur' }],
-        describe: [{ required: true, message: t('rule.notBlank', [t('column.websiteDescribe')]), trigger: 'blur' }]
+        describe: [{ required: true, message: t('rule.notBlank', [t('column.websiteDescribe')]), trigger: 'blur' }],
+        email: [{ required: true, message: t('rule.notBlank', [t('column.email')]), trigger: 'blur' }]
       }
       nextTick(() => {
         if (refForm.value) {

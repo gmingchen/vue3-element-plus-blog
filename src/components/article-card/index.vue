@@ -4,28 +4,30 @@
       <el-image
         class="image margin_r-20"
         fit="contain"
-        src="http://oss.blog.gumingchen.icu/image/qq.png" />
+        :src="data.cover" />
       <div class="detail-box flex-item_f-1">
         <div class="title-box flex-box flex_a_i-center flex_w-wrap">
-          <div class="category margin_r-5 padding-5 font-size-14">Vue</div>
-          <div class="title font-size-20">JavaScript中的事件循环</div>
+          <div class="category margin_r-5 padding-5 font-size-14">{{ data.category_name }}</div>
+          <div class="title font-size-20">{{ data.title }}</div>
         </div>
-        <div class="describe margin_t-10 font-size-14 ellipse-2">
-          JavaScript中的事件循环11313
-          JavaScript中的事件循环21313
-          JavaScript中的事件循环3131
-          JavaScript中的事件循环131
-          JavaScript中的事件循环3131313
-          JavaScript中的事件循环1313
-          JavaScript中的事件循环13133
-        </div>
-        <div class="other-box flex-box flex_w-wrap margin_t-10">
-          <g-icon name="clock" size="16px" />
-          <span class="margin_l-5 margin_r-10">2022-03-13</span>
-          <g-icon name="comment" size="16px" />
-          <span class="margin_l-5 margin_r-10">99</span>
-          <g-icon name="eye" size="16px" />
-          <span class="margin_l-5 margin_r-10">99</span>
+        <div class="describe margin_t-10 font-size-14 ellipse-2">{{ data.describe }}</div>
+        <div class="other-box flex-box flex_w-wrap margin_t-10 font-size-14">
+          <div class="margin_r-10">
+            <g-icon name="clock" size="16px" />
+            <span class="margin_l-5">{{ data.published_at.split(' ')[0] }}</span>
+          </div>
+          <div class="margin_r-10">
+            <g-icon name="comment" size="16px" />
+            <span class="margin_l-5">{{ data.comment > 99 ? '99+' : data.comment }}</span>
+          </div>
+          <div class="margin_r-10">
+            <g-icon name="praise" size="16px" />
+            <span class="margin_l-5">{{ data.praise > 99 ? '99+' : data.praise }}</span>
+          </div>
+          <div>
+            <g-icon name="eye" size="16px" />
+            <span class="margin_l-5">{{ data.read > 99 ? '99+' : data.read }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -36,6 +38,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
+  props: {
+    data: {
+      type: Object,
+      required: true
+    }
+  },
   setup() {
     const clickHandle = () => {
       console.log('click')
@@ -89,7 +97,6 @@ export default defineComponent({
       color: var(--el-color-info);
     }
     .other-box {
-      font-size: 14px;
       line-height: 25px;
       color: var(--el-color-info);
     }

@@ -2,7 +2,7 @@
   "name": "vue3-vite-element-plus-blog",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --mode development",
+    "dev": "vite --mode development --host",
     "prod": "vite --mode production",
     "test": "vite --mode testing",
     "build:dev": "vite build --mode development",

@@ -82,6 +82,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .client-layout {
-  background-color: var(--el-text-color-secondar);
+  background-color: #f2f2f2;
 }
 </style>

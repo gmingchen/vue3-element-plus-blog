@@ -128,6 +128,14 @@ export default {
   },
   client: {
     login: 'Sign in',
-    join: 'Join'
+    join: 'Join',
+    copyright: 'All Rights Reserved',
+    latestArticle: 'Latest article',
+    recommendArticle: 'Recommended articles',
+    popularArticle: 'Popular articles',
+    more: 'More',
+    contactMe: 'You can contact me in the following ways',
+    contactDirection: 'Suggestions, complaints, cooperation recommend this method',
+    sendTo: 'Send mail to'
   }
 }
