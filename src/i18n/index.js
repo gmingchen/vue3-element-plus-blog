@@ -1,14 +1,18 @@
 import { createI18n } from 'vue-i18n'
-const importModules = import.meta.globEager('./langs/*.js')
+
+const requireModules = require.context('./langs/', true, /\.(ts|js)$/iu)
 import { getLanguage } from '@/utils/storage'
 
 const messages = {}
 
-for (const key in importModules) {
-  const modular = importModules[key]
-  const name = key.replace(/\.\/langs\/|\.js/g, '')
-  messages[name] = modular.default
-}
+requireModules.keys().forEach(filePath => {
+  const modular = requireModules(filePath)
+  const name = filePath.replace(/\.\/|\.(js|ts)/g, '')
+  messages[name] = {
+    namespaced: true,
+    ...modular.default
+  }
+})
 
 const i18n = createI18n({
   locale: getLanguage() || 'cn', // 初始语言设置

@@ -73,7 +73,7 @@ export default defineComponent({
       }, millisec)
     }
     onBeforeMount(() => {
-      snow()
+      // snow()
     })
     return {}
   }
