@@ -81,7 +81,7 @@ module.exports = defineConfig({
     plugins: [
       // 按需引入Element-plus
       AutoImport({
-        resolvers: [ElementPlusResolver()]
+        resolvers: [ElementPlusResolver({ importStyle: false })]
       }),
       Components({
         resolvers: [ElementPlusResolver()]
@@ -89,14 +89,6 @@ module.exports = defineConfig({
     ],
     resolve: {
       fallback: { 'path': require.resolve('path-browserify') }
-    },
-    performance: {
-      // 警告 webpack 的性能提示
-      // hints: 'warning',
-      // 入口起点的最大体积
-      // maxEntrypointSize: 50000000,
-      // 生成文件的最大体积
-      // maxAssetSize: 30000000,
     }
   },
   // 对内部的webpack配置(比如修改、增加Loader选项)(链式操作).
