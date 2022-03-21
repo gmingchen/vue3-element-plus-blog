@@ -1,6 +1,10 @@
 .DS_Store
 node_modules
-/dist
+dist
+dist.zip
+blog
+blog.zip
+package-lock.json
 
 
 # local env files
