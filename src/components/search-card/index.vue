@@ -24,12 +24,14 @@
 <script>
 import { defineComponent, reactive, toRefs } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 import { searchSuggestApi } from '@/api/client/article'
 
 export default defineComponent({
   setup() {
     const { t } = useI18n()
+    const router = useRouter()
 
     const data = reactive({
       form: {
@@ -41,7 +43,7 @@ export default defineComponent({
       if (keyword) {
         const params = {
           ...data.form,
-          limit: 5
+          limit: 10
         }
         searchSuggestApi(params).then(r => {
           if (r) {
@@ -53,12 +55,22 @@ export default defineComponent({
       }
     }
 
-    const selectHandle = (a) => {
-      console.log(a)
+    const selectHandle = (row) => {
+      router.push({
+        name: 'articleDetail',
+        query: {
+          id: row.id
+        }
+      })
     }
 
-    const clickHandle = (a) => {
-      console.log(a)
+    const clickHandle = () => {
+      router.push({
+        name: 'search',
+        params: {
+          keyword: data.form.keyword
+        }
+      })
     }
 
     return {

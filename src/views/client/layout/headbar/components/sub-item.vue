@@ -36,7 +36,7 @@ export default defineComponent({
      * @param name 路由名称
      */
     const clickHandle = (data) => {
-      // router.push({ name: name })
+      router.push({ name: data.value })
       console.log(data)
     }
 

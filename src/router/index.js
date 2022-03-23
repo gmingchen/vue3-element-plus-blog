@@ -21,13 +21,39 @@ const client = {
       }
     },
     {
-      path: '/',
-      name: 'blog',
-      component: () => import('@/views/client/modules/blog/index.vue'),
-      meta: {
-        title_cn: '博客',
-        title_en: 'Blog'
-      }
+      path: '/layout',
+      name: 'layout',
+      component: () => import('@/views/client/modules/layout/index.vue'),
+      meta: { title_cn: '布局' },
+      children: [
+        {
+          path: '/blog',
+          name: 'blog',
+          component: () => import('@/views/client/modules/blog/index.vue'),
+          meta: {
+            title_cn: '博客',
+            title_en: 'Blog'
+          }
+        },
+        {
+          path: '/article',
+          name: 'articleDetail',
+          component: () => import('@/views/client/modules/article/index.vue'),
+          meta: {
+            title_cn: '文章',
+            title_en: 'Article'
+          }
+        },
+        {
+          path: '/search',
+          name: 'search',
+          component: () => import('@/views/client/modules/search/index.vue'),
+          meta: {
+            title_cn: '搜索',
+            title_en: 'Search'
+          }
+        }
+      ]
     }
   ],
   async beforeEnter(_to, _from, next) {

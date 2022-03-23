@@ -36,6 +36,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   props: {
@@ -44,10 +45,18 @@ export default defineComponent({
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    const router = useRouter()
+
     const clickHandle = () => {
-      console.log('click')
+      router.push({
+        name: 'articleDetail',
+        query: {
+          id: props.data.id
+        }
+      })
     }
+
     return {
       clickHandle
     }

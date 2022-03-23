@@ -5,8 +5,7 @@
       v-loading="loading"
       :model="form"
       :rules="rules"
-      label-position="top"
-      @keyup.enter="submit()">
+      label-position="top">
       <el-row :gutter="20">
         <el-col :span="6" class="min-width">
           <el-form-item :label="t('table.headline')" prop="title">
