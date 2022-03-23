@@ -15,6 +15,7 @@
     </div>
     <div class="blog-right flex-item_f-1 padding-n-20">
       <BusinessCard />
+      <SearchCard class="margin_t-10" />
       <RecommendCard class="margin_t-10" />
       <PopularityCard class="margin_t-10" />
       <ContactCard class="margin_t-10" />
@@ -30,6 +31,7 @@ import Banner from '@/components/banner/index.vue'
 import TitleBar from '@/components/title-bar/index.vue'
 import ArticleCard from '@/components/article-card/index.vue'
 import BusinessCard from '@/components/business-card/index.vue'
+import SearchCard from '@/components/search-card/index.vue'
 import RecommendCard from '@/components/recommend-card/index.vue'
 import PopularityCard from '@/components/popularity-card/index.vue'
 import ContactCard from '@/components/contact-card/index.vue'
@@ -37,7 +39,7 @@ import ContactCard from '@/components/contact-card/index.vue'
 import { latestApi } from '@/api/client/article'
 
 export default defineComponent({
-  components: { Banner, TitleBar, BusinessCard, ArticleCard, RecommendCard, PopularityCard, ContactCard },
+  components: { Banner, TitleBar, BusinessCard, SearchCard, ArticleCard, RecommendCard, PopularityCard, ContactCard },
   setup() {
     const { t } = useI18n()
 

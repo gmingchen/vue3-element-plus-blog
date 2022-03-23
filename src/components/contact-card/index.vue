@@ -61,6 +61,7 @@ export default defineComponent({
       line-height: 36px;
     }
     .send-btn {
+      padding: 0 15px;
       color: var(--el-color-primary)
     }
   }

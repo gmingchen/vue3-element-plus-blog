@@ -50,3 +50,17 @@ export function readApi(params) {
   })
 }
 
+/**
+ * @description: 搜索建议文章
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function searchSuggestApi(params) {
+  return service({
+    url: '/client/article/searchSuggest',
+    method: 'get',
+    params: params
+  })
+}
+
