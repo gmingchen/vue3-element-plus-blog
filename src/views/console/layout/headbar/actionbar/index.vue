@@ -1,5 +1,5 @@
 <template>
-  <div class="console-actionbar">
+  <div class="console-actionbar flex-box flex_a_i-center">
     <g-icon class="padding_r-10" name="refresh" @click="refreshHandle" />
     <g-icon class="padding_r-10" :name="screen ? 'collapse' : 'expand'" @click="screenfullHandle" />
     <g-icon class="padding_r-10" name="set" @click="themeHandle" />
