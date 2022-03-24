@@ -12,7 +12,7 @@
             <el-input
               v-model="form.title"
               :placeholder="t('table.headline')"
-              maxlength="20"
+              maxlength="50"
               show-word-limit />
           </el-form-item>
           <el-form-item :label="t('column.category')" prop="category_id">
@@ -91,7 +91,7 @@
               :placeholder="t('column.describe')"
               :rows="6"
               resize="none"
-              maxlength="100"
+              maxlength="200"
               show-word-limit />
           </el-form-item>
         </el-col>
@@ -255,6 +255,7 @@ export default defineComponent({
      */
     const init = async (id, rout) => {
       data.loading = true
+      data.form.id = id
       await getCategory()
       await getTag()
       await getInfo(id, rout)
@@ -309,6 +310,7 @@ export default defineComponent({
       refForm.value.resetFields()
       init(route.query.id, route)
     })
+
     onActivated(() => {
       refForm.value.resetFields()
       init(route.query.id, route)
@@ -328,6 +330,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .min-width {
-  min-width: 300px;
+  min-width: 350px;
 }
 </style>

@@ -136,6 +136,8 @@ export default {
     more: 'More',
     contactMe: 'You can contact me in the following ways',
     contactDirection: 'Suggestions, complaints, cooperation recommend this method',
-    sendTo: 'Send mail to'
+    sendTo: 'Send mail to',
+    home: 'Home',
+    blog: 'Blog'
   }
 }

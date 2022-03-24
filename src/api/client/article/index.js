@@ -64,3 +64,16 @@ export function searchSuggestApi(params) {
   })
 }
 
+/**
+ * @description: 获取文章详情
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function detailsApi(params) {
+  return service({
+    url: '/client/article/details',
+    method: 'get',
+    params: params
+  })
+}

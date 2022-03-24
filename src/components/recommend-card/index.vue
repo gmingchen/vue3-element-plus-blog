@@ -9,6 +9,7 @@
           class="margin_r-5" />
         <span class="font-size-20">{{ t('client.recommendArticle') }}</span>
       </div>
+      <el-empty v-if="!list || list.length < 1" />
       <ArticleCardConcise
         v-for="item in list"
         :key="item.id"

@@ -22,6 +22,8 @@ import { useRouter } from 'vue-router'
 
 import { listApi } from '@/api/client/banner'
 
+import { parseParam2Json } from '@/utils'
+
 export default defineComponent({
   setup() {
     const router = useRouter()
@@ -39,12 +41,15 @@ export default defineComponent({
     }
 
     const clickHandle = (banner) => {
+      let name, query
       switch (banner.type) {
         case 0:
           window.open(banner.url)
           break
         case 1:
-          router.push({ name: banner.url })
+          name = banner.url.split('?')[0]
+          query = parseParam2Json(banner.url)
+          router.push({ name, query })
           break
       }
     }

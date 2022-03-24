@@ -1,7 +1,7 @@
 <template>
   <div class="layout-container margin-0-a flex-box flex_w-wrap">
     <div class="layout-left flex-item_f-2 padding-n-20">
-      <View class="margin_t-90" />
+      <View />
     </div>
     <div class="layout-right flex-item_f-1 padding-n-20">
       <BusinessCard />

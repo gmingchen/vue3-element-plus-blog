@@ -17,7 +17,7 @@
           <el-popover
             v-else
             placement="bottom"
-            :width="350"
+            :width="400"
             trigger="hover">
             <template #reference>
               <el-image class="avatar" :src="user.avatar" />

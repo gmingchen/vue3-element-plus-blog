@@ -1,40 +1,38 @@
 <template>
-  <div class="title-bar-container height-52 flex-box flex_a_i-center flex_j_c-space-between padding-10">
+  <div class="crumb-bar-container height-52 flex-box flex_a_i-center flex_j_c-space-between padding-10">
     <div class="title flex-box flex_a_i-center">
       <g-icon
-        v-if="icon"
-        :name="icon"
+        name="location"
         size="23px"
-        color="red"
         class="margin_r-5" />
-      <span class="font-size-20">{{ title }}</span>
+      <el-breadcrumb>
+        <el-breadcrumb-item :to="{ name: 'home' }">{{ t('client.home') }}</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ name: 'blog' }">{{ t('client.blog') }}</el-breadcrumb-item>
+        <template v-for="(item, index) in data" :key="index">
+          <el-breadcrumb-item :to="item.route ? item.route : route">
+            {{ item.label }}
+          </el-breadcrumb-item>
+        </template>
+      </el-breadcrumb>
     </div>
-    <el-button v-if="name" type="text" @click="clickHandle">{{ t('client.more') }}</el-button>
   </div>
 </template>
 
 <script >
 import { defineComponent } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   props: {
-    title: {
-      type: [String, Number],
-      required: true
-    },
-    icon: {
-      type: String,
-      default: () => ''
-    },
-    name: {
-      type: String,
-      default: () => ''
+    data: {
+      type: Array,
+      default: () => []
     }
   },
   setup(props) {
     const { t } = useI18n()
+    const route = useRoute()
     const router = useRouter()
 
     const clickHandle = () => {
@@ -47,6 +45,7 @@ export default defineComponent({
 
     return {
       t,
+      route,
       clickHandle
     }
   }
@@ -54,7 +53,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.title-bar-container {
+.crumb-bar-container {
   color: var(--el-color-primary);
   font-weight: 600;
   border-radius: 4px;

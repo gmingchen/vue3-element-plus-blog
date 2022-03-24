@@ -1,11 +1,11 @@
 <template>
   <div class="blog-container">
-    <Banner />
+    <Banner class="margin_b-20" />
     <TitleBar
-      class="margin_t-20"
       :title="t('client.latestArticle')"
       icon="latest"
       name="blog" />
+    <el-empty v-if="!latestArticle || latestArticle.length < 1" />
     <ArticleCard
       v-for="item in latestArticle"
       :key="item.id"

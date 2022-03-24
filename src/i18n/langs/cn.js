@@ -136,6 +136,8 @@ export default {
     more: '更多',
     contactMe: '您可以通过以下方式联系我',
     contactDirection: '建议、投诉、合作推荐此方式',
-    sendTo: '发送邮件到'
+    sendTo: '发送邮件到',
+    home: '首页',
+    blog: '博客'
   }
 }

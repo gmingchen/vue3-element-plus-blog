@@ -14,7 +14,7 @@
       <img v-if="thisUrl" :src="thisUrl" class="avatar">
       <GSvg v-else name="plus" />
     </el-upload>
-    <el-input v-model="inputUrl" @blur="blurHandle" />
+    <el-input v-model="inputUrl" class="margin_t-10" @blur="blurHandle" />
   </div>
 </template>
 
@@ -92,6 +92,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .uploader {
   color: red;
+  line-height: 0;
   ::v-deep(.el-upload) {
     position: relative;
     overflow: hidden;

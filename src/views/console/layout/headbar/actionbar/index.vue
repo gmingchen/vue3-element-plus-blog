@@ -99,7 +99,7 @@ export default defineComponent({
           store.dispatch('user/logout')
           break
       }
-      router.push({ name: 'home' })
+      router.push({ name: 'blog' })
     }
 
     return {

@@ -1,5 +1,5 @@
 <template>
-  <div>123</div>
+  <div>{{ route.params.categoryId }}-{{ route.params.categoryName }}-{{ route.params.keyword }}</div>
 </template>
 
 <script>
@@ -17,7 +17,9 @@ export default defineComponent({
     onBeforeMount(() => {
       console.log(123)
     })
-    return {}
+    return {
+      route
+    }
   }
 })
 </script>
