@@ -10,7 +10,8 @@
   <el-pagination
     class="page flex_j_c-center margin_t-20 width-full"
     background
-    layout="total, sizes, prev, pager, next, jumper, ->"
+    :layout="layout"
+    :small="small"
     :current-page="page.current"
     :page-sizes="page.sizes"
     :page-size="page.size"
@@ -28,6 +29,14 @@ export default defineComponent({
     page: {
       type: Object,
       required: true
+    },
+    layout: {
+      type: String,
+      default: () => 'total, sizes, prev, pager, next, jumper, ->'
+    },
+    small: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ['change'],

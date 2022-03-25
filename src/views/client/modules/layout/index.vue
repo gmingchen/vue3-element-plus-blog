@@ -49,7 +49,7 @@ export default defineComponent({
 }
 
 .layout-container {
-  max-width: 1200px;
+  max-width: 1300px;
   .layout-left {
     min-width: 350px;
   }

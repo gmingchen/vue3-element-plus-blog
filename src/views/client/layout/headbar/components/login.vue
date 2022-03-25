@@ -56,9 +56,17 @@ export default defineComponent({
     const store = useStore()
     const { t } = useI18n()
 
+    const visible = computed({
+      get: () => {
+        return store.state.user.visible
+      },
+      set: (value) => {
+        store.dispatch('user/showLogin', value)
+      }
+    })
+
     const refForm = ref()
     const data = reactive({
-      visible: false,
       loading: false,
       form: {
         username: 'gumingchen',
@@ -78,16 +86,6 @@ export default defineComponent({
     })
 
     /**
-     * @description: 初始化
-     * @param {*} id
-     * @return {*}
-     * @author: gumingchen
-     */
-    const init = () => {
-      data.visible = true
-    }
-
-    /**
      * @description: 表单验证提交
      * @param {*}
      * @return {*}
@@ -99,7 +97,7 @@ export default defineComponent({
           data.loading = true
           store.dispatch('user/login', data.form).then(async r => {
             if (r) {
-              data.visible = false
+              visible.value = false
               await store.dispatch('user/getUser')
             }
             nextTick(() => {
@@ -123,9 +121,9 @@ export default defineComponent({
     return {
       t,
       refForm,
+      visible,
       ...toRefs(data),
       rules,
-      init,
       submit,
       dialogClosedHandle
     }

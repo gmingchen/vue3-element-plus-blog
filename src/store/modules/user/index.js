@@ -13,6 +13,7 @@ import { clearJson } from '@/utils/index'
 
 export default {
   state: {
+    visible: false,
     user: {
       id: '',
       username: '',
@@ -33,6 +34,9 @@ export default {
     }
   },
   mutations: {
+    SET_VISIBLE: (state, visible) => {
+      state.visible = visible
+    },
     SET_USER: (state, user) => {
       state.user = user
     },
@@ -47,6 +51,15 @@ export default {
     }
   },
   actions: {
+
+    /**
+     * 是否显示登录弹窗
+     * @param {*} params
+     * @returns
+     */
+    showLogin({ commit }, visible) {
+      commit('SET_VISIBLE', visible)
+    },
 
     /**
      * 登录

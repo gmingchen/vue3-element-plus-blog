@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <Login v-if="visible" ref="refLogin" />
+    <Login ref="refLogin" />
     <MenuDrawer v-model="drawerVisible" />
   </div>
 </template>
@@ -58,15 +58,11 @@ export default defineComponent({
 
     const refLogin = ref()
     const data = reactive({
-      visible: false,
       drawerVisible: false
     })
 
     const loginHandle = () => {
-      data.visible = true
-      nextTick(() => {
-        refLogin.value.init()
-      })
+      store.dispatch('user/showLogin', true)
     }
 
     const drawerHandle = () => {
@@ -107,7 +103,7 @@ $height: 60px;
     z-index: 100;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
     .content-box {
-      max-width: 1200px;
+      max-width: 1300px;
       .logo-box {
         max-width: 400px;
         line-height: $height;
