@@ -97,7 +97,8 @@ export default {
     confirmTip: 'Confirm the [{0}] operation?',
     confirmOperationTip: 'Confirm the [{1}] operation on [id={0}]?',
     startTime: 'Start time',
-    endTime: 'End time'
+    endTime: 'End time',
+    commentSuccess: 'Comment success!'
   },
   console: {
     title: 'Console',
@@ -138,6 +139,9 @@ export default {
     contactDirection: 'Suggestions, complaints, cooperation recommend this method',
     sendTo: 'Send mail to',
     home: 'Home',
-    blog: 'Blog'
+    blog: 'Blog',
+    reply: 'Reply',
+    replies: '{0} replies',
+    viewAll: 'View all'
   }
 }

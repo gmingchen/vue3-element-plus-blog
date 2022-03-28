@@ -40,6 +40,9 @@ export default defineComponent({
 @media screen and (max-width: 800px) {
   .layout-container {
     flex-direction: column;
+    .layout-right {
+      margin-top: 20px;
+    }
   }
 }
 @media screen and (max-width: 400px) {

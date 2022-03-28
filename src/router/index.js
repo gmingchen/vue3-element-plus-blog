@@ -174,7 +174,10 @@ const routes = global.concat(client).concat(console).concat([{ path: '/:pathMatc
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 router.beforeEach((to, _from, next) => {

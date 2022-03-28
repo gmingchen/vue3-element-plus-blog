@@ -97,7 +97,8 @@ export default {
     confirmTip: '确定进行[{0}]操作?',
     confirmOperationTip: '确定对[id={0}]进行[{1}]操作?',
     startTime: '开始时间',
-    endTime: '结束时间'
+    endTime: '结束时间',
+    commentSuccess: '评论成功!'
   },
   console: {
     title: '控制台',
@@ -138,6 +139,9 @@ export default {
     contactDirection: '建议、投诉、合作推荐此方式',
     sendTo: '发送邮件到',
     home: '首页',
-    blog: '博客'
+    blog: '博客',
+    reply: '回复',
+    replies: '{0} 条回复',
+    viewAll: '查看全部'
   }
 }

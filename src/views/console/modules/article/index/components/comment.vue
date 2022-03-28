@@ -12,6 +12,7 @@
     width="80%"
     :title="t('button.comment')"
     :close-on-click-modal="false"
+    draggable
     @closed="dialogClosedHandle">
     <el-form ref="refForm" :inline="true" @keyup.enter="reacquireHandle()">
       <el-form-item>

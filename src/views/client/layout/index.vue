@@ -1,7 +1,7 @@
 <template>
   <el-container class="client-layout height-full width-full">
     <Headbar />
-    <el-scrollbar class="width-full">
+    <el-scrollbar ref="refScrollbar" class="width-full">
       <View class="margin_t-90" />
       <Footer class="margin_t-20" />
     </el-scrollbar>
@@ -9,7 +9,8 @@
 </template>
 
 <script>
-import { defineComponent, onBeforeMount } from 'vue'
+import { defineComponent, onBeforeMount, ref } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 
 import Headbar from './headbar/index.vue'
 import View from '@/components/view/index.vue'
@@ -18,6 +19,7 @@ import Footer from './footer/index.vue'
 export default defineComponent({
   components: { Headbar, View, Footer },
   setup() {
+    const refScrollbar = ref()
     const snow = () => {
       // 1、定义一片雪花模板
       const flake = document.createElement('div')
@@ -72,10 +74,15 @@ export default defineComponent({
         }, 0)
       }, millisec)
     }
+    onBeforeRouteUpdate(() => {
+      refScrollbar.value.setScrollTop(0)
+    })
     onBeforeMount(() => {
       snow()
     })
-    return {}
+    return {
+      refScrollbar
+    }
   }
 })
 </script>

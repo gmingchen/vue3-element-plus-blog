@@ -12,6 +12,7 @@
     width="1000px"
     :title="t('button.detail')"
     :close-on-click-modal="false"
+    draggable
     @closed="dialogClosedHandle">
     <el-form ref="refForm" :inline="true">
       <el-form-item>

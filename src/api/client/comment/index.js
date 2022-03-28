@@ -35,3 +35,17 @@ export function addApi(params) {
     data: params
   })
 }
+
+/**
+ * @description: 删除用户自己的评论
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function delApi(params) {
+  return service({
+    url: '/client/comment/delete',
+    method: 'post',
+    data: params
+  })
+}

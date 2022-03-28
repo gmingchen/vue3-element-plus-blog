@@ -66,6 +66,7 @@ export default defineComponent({
       if (token.value && /\S/u.test(token.value)) {
         if (keyword.value.trim()) {
           emit('submit', keyword.value)
+          keyword.value = ''
         }
       } else {
         store.dispatch('user/showLogin', true)
@@ -77,7 +78,6 @@ export default defineComponent({
      */
     const listener = (e) => {
       if (e.keyCode === 13) {
-        console.log(e.keyCode)
         if (!e.shiftKey) {
           submit()
           e.preventDefault()

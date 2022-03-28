@@ -34,16 +34,18 @@
         v-model="keyword"
         class="margin_t-20"
         @submit="commentHandle" />
-      <CommentCard :id="id" class="margin_t-20" />
+      <CommentCard :id="id" ref="refCommentCard" class="margin_t-20" />
     </div>
     <el-empty v-else />
   </div>
 </template>
 
 <script>
-import { defineComponent, nextTick, onBeforeMount, reactive, toRefs } from 'vue'
+import { defineComponent, nextTick, onBeforeMount, reactive, toRefs, ref } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 
+import { ElMessage } from 'element-plus'
 import CrumbBar from '@/components/crumb-bar'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
@@ -56,7 +58,10 @@ import { addApi } from '@/api/client/comment'
 export default defineComponent({
   components: { CrumbBar, MdEditor, TextareaCard, CommentCard },
   setup() {
+    const { t } = useI18n()
     const route = useRoute()
+
+    const refCommentCard = ref()
 
     const data = reactive({
       loading: false,
@@ -103,7 +108,11 @@ export default defineComponent({
       }
       addApi(params).then(r => {
         if (r) {
-          console.log(r)
+          ElMessage({
+            message: t('tip.commentSuccess'),
+            type: 'success'
+          })
+          refCommentCard.value.reacquireHandle()
         }
       })
     }
@@ -119,6 +128,7 @@ export default defineComponent({
     })
 
     return {
+      refCommentCard,
       ...toRefs(data),
       commentHandle
     }

@@ -12,6 +12,7 @@
     width="500px"
     custom-class="login-dialog"
     :close-on-click-modal="false"
+    draggable
     @closed="dialogClosedHandle">
     <div class="logo-box flex-box flex_j_c-center flex_a_i-center margin_b-10">
       <el-image class="logo" src="http://oss.blog.gumingchen.icu/image/logo.png" />
