@@ -36,8 +36,16 @@ export default defineComponent({
      * @param name 路由名称
      */
     const clickHandle = (data) => {
-      router.push({ name: data.value })
-      console.log(data)
+      if (data.type === 1) {
+        router.push({
+          name: 'search',
+          query: {
+            id: data.value
+          }
+        })
+      } else {
+        router.push({ name: data.value })
+      }
     }
 
     return {

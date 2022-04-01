@@ -197,7 +197,7 @@ router.push = (to) => {
   try {
     return originalPush(to)
   } catch (error) {
-    console.log(`%c${ error }`, 'color:red')
+    window.console.log(`%c${ error }`, 'color:red')
     return originalPush({ name: '401' })
   }
 }

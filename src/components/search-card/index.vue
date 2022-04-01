@@ -67,7 +67,7 @@ export default defineComponent({
     const clickHandle = () => {
       router.push({
         name: 'search',
-        params: {
+        query: {
           keyword: data.form.keyword
         }
       })

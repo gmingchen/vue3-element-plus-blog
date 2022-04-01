@@ -20,3 +20,17 @@ export function listApi() {
     method: 'get'
   })
 }
+
+/**
+ * @description: 分类详情
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function infoApi(params) {
+  return service({
+    url: '/client/category/info',
+    method: 'get',
+    params: params
+  })
+}

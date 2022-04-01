@@ -77,3 +77,18 @@ export function detailsApi(params) {
     params: params
   })
 }
+
+/**
+ * @description: 搜索文章分页
+ * @param {*}
+ * @return {*}
+ * @author: gumingchen
+ */
+export function searchApi(params) {
+  return service({
+    url: '/client/article/search',
+    method: 'get',
+    params: params
+  })
+}
+

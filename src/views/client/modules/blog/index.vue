@@ -4,7 +4,7 @@
     <TitleBar
       :title="t('client.latestArticle')"
       icon="latest"
-      name="blog" />
+      name="search" />
     <el-empty v-if="!latestArticle || latestArticle.length < 1" />
     <ArticleCard
       v-for="item in latestArticle"
