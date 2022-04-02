@@ -80,7 +80,7 @@ export default defineComponent({
       data.loading = true
       const params = {
         keyword: data.form.keyword,
-        category_id: data.form.categoryId,
+        category: data.form.categoryId,
         current: page.current,
         size: page.size
       }

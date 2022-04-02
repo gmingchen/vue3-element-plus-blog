@@ -2,7 +2,7 @@
   <el-card class="article-card" shadow="hover" @click="clickHandle()">
     <div class="flex-box flex_w-wrap">
       <el-image
-        class="image margin_r-20"
+        class="image margin_r-20 width-200"
         fit="contain"
         :src="data.cover" />
       <div class="detail-box flex-item_f-1">
