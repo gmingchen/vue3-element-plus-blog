@@ -31,8 +31,8 @@ export default defineComponent({
           label_en: 'Category',
           children: []
         },
-        { value: 'time', label_cn: '时光轴', label_en: 'Time line', children: [] },
-        { value: 'message', label_cn: '留言', label_en: 'Message', children: [] },
+        { value: 'message', label_cn: '留言板', label_en: 'Message', children: [] },
+        { value: 'timeline', label_cn: '时光轴', label_en: 'Timeline', children: [] },
         { value: 'about', label_cn: '关于', label_en: 'About', children: [] }
       ]
     })

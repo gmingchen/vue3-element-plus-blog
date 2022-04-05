@@ -52,6 +52,33 @@ const client = {
             title_cn: '搜索',
             title_en: 'Search'
           }
+        },
+        {
+          path: '/message',
+          name: 'message',
+          component: () => import('@/views/client/modules/message/index.vue'),
+          meta: {
+            title_cn: '留言板',
+            title_en: 'Message Board'
+          }
+        },
+        {
+          path: '/timeline',
+          name: 'timeline',
+          component: () => import('@/views/client/modules/timeline/index.vue'),
+          meta: {
+            title_cn: '时光轴',
+            title_en: 'Timeline'
+          }
+        },
+        {
+          path: '/about',
+          name: 'about',
+          component: () => import('@/views/client/modules/about/index.vue'),
+          meta: {
+            title_cn: '关于',
+            title_en: 'About'
+          }
         }
       ]
     }
